@@ -1,0 +1,34 @@
+<h1>Shop#main</h1>
+<p>Find me in app/views/shop/main.html.erb</p>
+<h1> Hi <%=@user%></h1>
+<table style= 'border-spacing:10px;'>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Stock</th>
+    <th>Seller</th>
+    <% if session[:username] != nil%>
+      <th>Buy</th>
+    <% end%>
+  </tr>
+  <p style="visibility:hidden;"><% for i in 0..@size do %></p>
+    <tr>
+    <td><%=@name[i]%></td>
+    <td><%=@price[i]%></td>
+    <td><%=@stock[i]%></td> 
+    <td><%=@seller[i]%></td>
+    <% if session[:username] != nil%>
+        <td>
+        <%= form_with url: '/shop/item_manage', method: 'post', data: {turbo:false} do |form| %>
+            <%= form.hidden_field :item_id,value:@id[i]%>
+            <%= form.submit "Buy"%>
+        <%end%>
+        </td>
+    <% end %>
+   
+    </tr>
+<% end %>
+</table>
+<%= form_with url: '/main/user_item', method: 'post', data: {turbo:false} do |form| %>
+  <%= form.submit "Back to user_item"%>
+<%end%>

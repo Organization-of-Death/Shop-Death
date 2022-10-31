@@ -1,0 +1,14 @@
+<h1>Item#new</h1>
+<p>Find me in app/views/item/new.html.erb</p>
+<%=@User%>
+<%= form_with url: '/main/user_manage', method: :post, data:{turbo:false} do |form| %>
+    <%= form.label :query, "Name:" %>
+    <%= form.text_field "name",:value => params["name"],:required=>'required' %><br>
+    <%= form.label :query, "Price:" %>
+    <%= form.number_field "price",:value => params["price"],:required=>'required' %><br>
+    <%= form.label :query, "Stock" %>
+    <%= form.number_field "stock",:value =>params["stock"],:required=>'required' %>
+    <br>
+    <%= form.hidden_field :username,value:@User%>
+    <%= form.submit "Create" %>
+<% end %>

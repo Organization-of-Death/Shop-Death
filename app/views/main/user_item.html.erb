@@ -1,0 +1,49 @@
+<h1> Hi <%=@Name%> (Username)</h1>
+<style>
+
+</style>
+<h3> List of your market</h3>
+<table style= 'border-spacing:10px;'>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Stock</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+<p style="visibility:hidden;"><% for i in 0..@size do %></p>
+    <tr>
+    <td><%=@all_item[i].name%></td>
+    <td><%=@all_item[i].price%></td>
+    <td><%=@all_item[i].stock%></td> 
+    <td>
+        <%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
+            <%= form.hidden_field :item_id,value:@all_item[i].id%>    
+            <%= form.submit "Edit"%>
+        <%end%>
+    </td>
+    <td>
+        <%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
+            <%= form.hidden_field :item_id,value:@all_item[i].id%>
+            <%= form.submit "Delete"%>
+        <%end%>
+    </td>
+    </tr>
+<% end %>
+</table>
+<%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
+    <%= form.hidden_field :username,value:@Username%>
+    <%= form.submit "New"%>
+<%end%>
+<%= form_with url: '/shop/main', method: 'post', data: {turbo:false} do |form| %>
+    <%= form.hidden_field :username,value:@Username%>
+    <%= form.submit "Shop"%>
+<%end%>
+<%= form_with url: '/main/inventories', method: 'post', data: {turbo:false} do |form| %>
+    <%= form.hidden_field :username,value:@Username%>
+    <%= form.submit "Go to inventory"%>
+<%end%>
+<%= form_with url: '/main/log_out', method: 'post', data: {turbo:false} do |form| %>
+    <%= form.hidden_field :username,value:@Username%>
+    <%= form.submit "Logout"%>
+<%end%>

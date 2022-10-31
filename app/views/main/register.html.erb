@@ -1,0 +1,12 @@
+
+<h1> Hello New User! </h1>
+<%= form_with url: '/main/user_item', method: :post, data:{turbo:false} do |form| %>
+    <%= form.label :query, "Name:" %>
+    <%= form.text_field "name",:value => params["name"],:required=>'required' %><br>
+    <%= form.label :query, "Username:" %>
+    <%= form.text_field "username",:value => params["username"],:required=>'required' %><br>
+    <%= form.label :query, "Password:" %>
+    <%= form.text_field "password",:value =>params["password"] ,:required=>'required'%>
+    <br>
+    <%= form.submit "Register" %>
+<% end %>

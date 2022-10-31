@@ -1,0 +1,15 @@
+<h1>Main#login</h1>
+<p>Find me in app/views/main/login.html.erb</p>
+<%= form_with url: '/main/user_item', method: :post, data:{turbo:false} do |form| %>
+
+    <%= form.label :query, "Username:" %>
+    <%= form.text_field "username",:value => params["username"],:required=>'required' %>
+    <%= form.label :query, "Password:" %>
+    <%= form.text_field "password",:value =>params["password"],:required=>'required' %>
+    <br>
+    <%= form.submit "Login" %>
+<% end %>
+<%= form_with url: '/main/register', method: :post, data:{turbo:false} do |form| %>
+    <%= form.submit "Register" %>
+<% end %>
+
