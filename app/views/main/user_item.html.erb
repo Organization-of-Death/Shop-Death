@@ -3,7 +3,7 @@
 
 </style>
 <h3> List of your market</h3>
-<table style= 'border-spacing:10px;'>
+<table class='table' >
   <tr>
     <th>Name</th>
     <th>Price</th>
@@ -19,13 +19,13 @@
     <td>
         <%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
             <%= form.hidden_field :item_id,value:@all_item[i].id%>    
-            <%= form.submit "Edit"%>
+            <%= form.submit "Edit",:class=>'btn btn-primary'%>
         <%end%>
     </td>
     <td>
         <%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
             <%= form.hidden_field :item_id,value:@all_item[i].id%>
-            <%= form.submit "Delete"%>
+            <%= form.submit "Delete",:class=>'btn btn-primary'%>
         <%end%>
     </td>
     </tr>

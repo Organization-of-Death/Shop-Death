@@ -2,12 +2,16 @@
 <p>Find me in app/views/main/login.html.erb</p>
 <%= form_with url: '/main/user_item', method: :post, data:{turbo:false} do |form| %>
 
-    <%= form.label :query, "Username:" %>
-    <%= form.text_field "username",:value => params["username"],:required=>'required' %>
-    <%= form.label :query, "Password:" %>
-    <%= form.text_field "password",:value =>params["password"],:required=>'required' %>
+    
+        <%= form.label :query, "Username:" %>
+        <%= form.text_field "username",:value => params["username"],:required=>'required',:class=>'form-control' %>
+   
+    
+        <%= form.label :query, "Password:" %>
+        <%= form.text_field "password",:type=>'password',:value =>params["password"],:required=>'required',:class=>'form-control' %>
+ 
     <br>
-    <%= form.submit "Login" %>
+    <%= form.submit "Login",:class=>'btn btn-primary' %>
 <% end %>
 <%= form_with url: '/main/register', method: :post, data:{turbo:false} do |form| %>
     <%= form.submit "Register" %>
