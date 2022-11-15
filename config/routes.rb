@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'main#welcome'
-  #root 'main#login'  //in case u reset db 
+  #root 'main#login'  
+  get 'main/home'
+  post 'main/home'
   post 'main/log_out'
   post 'shop/item_manage'
   get 'shop/main'
