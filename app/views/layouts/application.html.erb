@@ -17,7 +17,13 @@
   <% if session[:username] == nil %>
     
   <% else %>
-    <%= render 'layouts/navbar' %>
+    <%if session[:usertype] == 0 %>
+     <%= render 'layouts/navbar0' %>
+    <% elsif session[:usertype] == 1 %>
+     <%= render 'layouts/navbar1' %>
+    <% else %>
+     <%= render 'layouts/navbar2' %>
+    <% end %>
   <% end %>
   <div class='container'>
   <% flash.each do |type,msg| %>

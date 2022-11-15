@@ -1,7 +1,7 @@
 class MainController < ApplicationController
   def login
   end
-  def welcome
+  def welcome # two root direction
     if(session[:username] != nil)
       puts 'd'
       redirect_to main_user_item_path,hi:'yo' and return
@@ -29,6 +29,9 @@ class MainController < ApplicationController
           @Name = whoare.username
           @Username = whoare.username
           session[:username] = whoare.username
+          session[:usertype] = whoare.user_type
+          puts session[:usertype]
+          puts 'saas'
           Item.connection
           User.connection
           whoare = User.find_by username: params["username"]
@@ -47,10 +50,12 @@ class MainController < ApplicationController
         neware.name = params["name"]
         neware.username = params["username"]
         neware.password = params["password"]
+        neware.user_type = params['usertype']
         neware.save
         @Name = params['username']
         @Username = params['username']
         session[:username] = params['username']
+        session[:usertype] = params['usertype']
         Item.connection
         User.connection
         whoare = User.find_by username: params["username"]

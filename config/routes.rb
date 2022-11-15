@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'main#welcome'
-
+  #root 'main#login'  //in case u reset db 
   post 'main/log_out'
   post 'shop/item_manage'
   get 'shop/main'
