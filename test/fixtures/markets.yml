@@ -2,8 +2,8 @@
 
 one:
   price: 9.99
-  qty: 1
+  stock: 1
 
 two:
   price: 9.99
-  qty: 1
+  stock: 1

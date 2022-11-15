@@ -1,9 +1,20 @@
 class MainController < ApplicationController
   def login
   end
-  def user_item
-    a = 'sa'
-    #testing
+  def welcome # two root direction
+    if(session[:username] != nil)
+      puts 'd'
+      redirect_to main_home_path,hi:'yo' and return
+    else
+      redirect_to main_login_path,hi:'yo' and return
+    end
+   
+  end
+  def home
+    if params['hi'] == 'yo'
+      puts 'x'
+      return
+    end
     if params['commit'] == 'Login'
       User.connection
       puts 'aaaaaaaaaaaaaaaaaaaa'
@@ -16,15 +27,15 @@ class MainController < ApplicationController
           redirect_to main_login_path, notice:'Wrong password or username!'
         else #normal case
           @Name = whoare.username
-          @Username = whoare.username
+          
           session[:username] = whoare.username
+          session[:usertype] = whoare.user_type
+        
+     
           Item.connection
           User.connection
-          whoare = User.find_by username: params["username"]
-          @all_item = Item.where(User_id: whoare)
-        
-          @size =  (@all_item.size-1)
-        
+      
+
         end
       end
     elsif params['commit'] == 'Register'
@@ -36,19 +47,20 @@ class MainController < ApplicationController
         neware.name = params["name"]
         neware.username = params["username"]
         neware.password = params["password"]
+        neware.user_type = params['usertype']
         neware.save
         @Name = params['username']
-        @Username = params['username']
+        
         session[:username] = params['username']
+        session[:usertype] = params['usertype']
         Item.connection
         User.connection
-        whoare = User.find_by username: params["username"]
-         @all_item = Item.where(User_id: whoare)
-         @size =  (@all_item.size-1)
+ 
       else 
         redirect_to main_register_path, notice:'This username is already used!!!'
       end
     else 
+      puts'sdssd'
       if(session[:username] == nil)
         return redirect_to main_login_path, notice:'you must login first'
       end
@@ -56,9 +68,11 @@ class MainController < ApplicationController
         User.connection
         whoare = User.find_by username: session["username"]
         @Name = whoare.username
-        @all_item = Item.where(User_id: whoare)
-        @size =  (@all_item.size-1)
+  
     end
+  end
+  def user_item
+   
   end
   def register
   end
