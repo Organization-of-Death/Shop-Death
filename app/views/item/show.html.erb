@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+<%= render partial: "item/item", :locals =>{item: @item} %>
+
+<div>
+    <%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
+        <%= form.hidden_field :item_id, value: @item.id%>    
+        <%= form.submit "Edit",:class=>'btn btn-primary'%>
+    <%end%>
+
+    <%= link_to "Back to items", item_index_path %>
+
+    <%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
+        <%= form.hidden_field :item_id,value:@item.id%>
+        <%= form.submit "Delete",:class=>'btn btn-primary'%>
+<%end%>
+</div>

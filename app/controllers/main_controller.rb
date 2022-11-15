@@ -86,29 +86,33 @@ class MainController < ApplicationController
       newitem = Item.new
       whoare = User.find_by username: params["username"]
       newitem.name = params['name']
-      newitem.price = params['price']
-      newitem.stock = params['stock']
-      newitem.User_id = whoare.id
+      newitem.category = params['category']
       newitem.save
-      redirect_to controller:'main',action:'user_item', Username: session['username']
+      redirect_to controller: 'item', action: 'index'
+      # redirect_to controller:'main',action:'user_item', Username: session['username']
     elsif params['commit'] == 'Edit'
-      
+      puts '===================='
+      puts params['item_id']
+      puts '===================='
       redirect_to controller:'item',action:'edit', item_id: params['item_id']
     elsif params['commit'] == 'Done'
       Item.connection
       User.connection
       item = Item.find_by id: params['item_id']
       item.name = params['name']
-      item.price = params['price']
-      item.stock = params['stock']
+      item.category = params['category']
+      # item.price = params['price']
+      # item.stock = params['stock']
       item.save
-      redirect_to controller:'main',action:'user_item', Username: session['username']
+      redirect_to controller: 'item', action: 'index'
+      # redirect_to controller:'main',action:'user_item', Username: session['username']
     elsif params['commit'] == 'Delete'
       Item.connection
       User.connection
       item = Item.find_by id:params['item_id']
       item.destroy
-      redirect_to controller:'main',action:'user_item'
+      redirect_to controller: 'item', action: 'index'
+      # redirect_to controller:'main',action:'user_item'
     else
     end
   end

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Items</h1>
+
+<div id="items">
+  <% @items.each do |item| %>
+    <%= render partial: "item/item", :locals =>{item: item} %>
+    <p>
+      <%= link_to "Show this item", show_item_path(item.id) %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New item", new_item_path %>
