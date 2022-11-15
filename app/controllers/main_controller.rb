@@ -47,12 +47,12 @@ class MainController < ApplicationController
         neware.name = params["name"]
         neware.username = params["username"]
         neware.password = params["password"]
-        neware.user_type = params['usertype']
+        neware.user_type = params['usertype'].to_i
         neware.save
         @Name = params['username']
         
         session[:username] = params['username']
-        session[:usertype] = params['usertype']
+        session[:usertype] = params['usertype'].to_i
         Item.connection
         User.connection
  
