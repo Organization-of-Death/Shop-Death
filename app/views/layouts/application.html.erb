@@ -13,6 +13,12 @@
   </head>
 
   <body>
+  
+  <% if session[:username] == nil %>
+    
+  <% else %>
+    <%= render 'layouts/navbar' %>
+  <% end %>
   <div class='container'>
   <% flash.each do |type,msg| %>
     <p style='color:red'> 
