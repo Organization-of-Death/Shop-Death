@@ -1,3 +1,4 @@
 class Item < ApplicationRecord
-  belongs_to :User
+  has_many :Inventory,  :dependent => :destroy
+  has_many :Market,  :dependent => :destroy
 end
