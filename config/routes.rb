@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  get 'profile/main'
+  post 'profile/main'
   root 'main#welcome'
-  #root 'main#login'  
+  #root 'main#login'
+  post 'profile/password'
+
   get 'main/home'
   post 'main/home'
   post 'main/log_out'
