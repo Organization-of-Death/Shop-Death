@@ -24,7 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_150054) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.string "username"
     t.integer "price"
     t.integer "stock"
     t.integer "User_id", null: false

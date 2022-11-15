@@ -2,6 +2,8 @@ class MainController < ApplicationController
   def login
   end
   def user_item
+    a = 'sa'
+    #testing
     if params['commit'] == 'Login'
       User.connection
       puts 'aaaaaaaaaaaaaaaaaaaa'
