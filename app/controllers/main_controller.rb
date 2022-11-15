@@ -1,9 +1,20 @@
 class MainController < ApplicationController
   def login
   end
+  def welcome
+    if(session[:username] != nil)
+      puts 'd'
+      redirect_to main_user_item_path,hi:'yo' and return
+    else
+      redirect_to main_login_path,hi:'yo' and return
+    end
+   
+  end
   def user_item
-    a = 'sa'
-    #testing
+    if params['hi'] == 'yo'
+      puts 'x'
+      return
+    end
     if params['commit'] == 'Login'
       User.connection
       puts 'aaaaaaaaaaaaaaaaaaaa'
@@ -49,6 +60,7 @@ class MainController < ApplicationController
         redirect_to main_register_path, notice:'This username is already used!!!'
       end
     else 
+      puts'sdssd'
       if(session[:username] == nil)
         return redirect_to main_login_path, notice:'you must login first'
       end

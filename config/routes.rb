@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  root 'main#welcome'
 
-  root 'main#login'
   post 'main/log_out'
   post 'shop/item_manage'
   get 'shop/main'
