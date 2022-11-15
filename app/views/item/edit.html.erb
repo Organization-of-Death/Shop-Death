@@ -4,10 +4,8 @@
 <%= form_with url: '/main/user_manage', method: :post, data:{turbo:false} do |form| %>
     <%= form.label :query, "Name:" %>
     <%= form.text_field "name",:value => @name,:required=>'required'%><br>
-    <%= form.label :query, "Price:" %>
-    <%= form.number_field "price",:value => @price,:required=>'required' %><br>
-    <%= form.label :query, "Stock" %>
-    <%= form.number_field "stock",:value =>@stock,:required=>'required' %>
+    <%= form.label :query, "category" %>
+    <%= form.text_field "category",:value =>@category,:required=>'required' %>
     
     <br>
     <%= form.hidden_field :item_id,value:@Item%>

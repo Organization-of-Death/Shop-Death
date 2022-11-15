@@ -9,8 +9,12 @@ Rails.application.routes.draw do
   post 'shop/main'
   get 'main/inventories'
   post 'main/inventories'
-  get 'item/new'
-  get 'item/edit'
+
+  get 'item', to: 'item#index', as: 'item_index'
+  get 'item/new', as: 'new_item'
+  get 'item/edit', as: 'edit_item'
+  get 'item/:id', to: 'item#show', as: 'show_item'
+
   get 'main/login'
   post 'main/login'
   get 'main/user_item'
