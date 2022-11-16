@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   #root 'main#login'
   post 'profile/password'
 
+  get 'user/main'
+  post 'user/user_manage'
+  get 'user/user_manage'
+  get 'user/edit'
+  get 'user/new'
+
   get 'main/home'
   post 'main/home'
   post 'main/log_out'

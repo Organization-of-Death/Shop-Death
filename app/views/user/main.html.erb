@@ -1,0 +1,36 @@
+<h1>User#main</h1>
+<p>Find me in app/views/user/main.html.erb</p>
+<table class='table' >
+  <tr>
+    <th>ID</th>
+    <th>Username</th>
+    <th>Name</th>
+    <th>User Type</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+<p style="visibility:hidden;"><% for i in 0..@size do %></p>
+    <tr>
+    <td><%=@all_user[i].id%></td>
+    <td><%=@all_user[i].username%></td>
+    <td><%=@all_user[i].name%></td> 
+    <td><%=@all_user[i].user_type%></td> 
+    <td>
+        <%= form_with url: '/user/user_manage', method: 'post', data: {turbo:false} do |form| %>
+            <%= form.hidden_field :id,value:@all_user[i].id%>    
+            <%= form.submit "Edit",:class=>'btn btn-primary'%>
+        <%end%>
+    </td>
+    <td>
+        <%= form_with url: '/user/user_manage', method: 'post', data: {turbo:false} do |form| %>
+            <%= form.hidden_field :id,value:@all_user[i].id%>
+            <%= form.submit "Delete",:class=>'btn btn-primary'%>
+        <%end%>
+    </td>
+    </tr>
+<% end %>
+</table>
+<%= form_with url: '/user/user_manage', method: 'post', data: {turbo:false} do |form| %>
+    <%= form.hidden_field :username,value:@Username%>
+    <%= form.submit "New",:class=>'btn btn-primary'%>
+<%end%>
