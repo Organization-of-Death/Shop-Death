@@ -1,0 +1,63 @@
+<h1>Market#index</h1>
+<p>Find me in app/views/market/index.html.erb</p>
+
+<h2>You're selling</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Item_ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Picture</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @markets.each do |m| %>
+            <tr>
+                <td><%= m.item_id %></td>
+                <td><%= m.get_item_name %></td>
+                <td><%= m.get_item_category %></td>
+                <td><%= "SHOW OR EDIT PRICE TEXTBOX" %></td>
+                <td><%= "SHOW OR EDIT STOCK TEXTBOX" %></td>
+                <td><%= "IMAGE TAG" %></td>
+                <td><%= "EDIT BTN" %></td>
+                <td><%= "DELETE BTN" %></td>
+            </tr>
+        <% end %>
+
+        <tr><td>Not selling anything yo</td></tr>
+    </tbody>
+</table>
+
+<br>
+
+<h2>sell more? check down</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Item_ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Picture</th>
+            <th>Sell Now!</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>God doesn't have anything for you to sell yo</td></tr>
+
+        <% @items.each do |i| %>
+            <tr>
+                <td><%= i.id %></td>
+                <td><%= i.name %></td>
+                <td><%= i.category %></td>
+                <td><%= "IMAGE TAG" %></td>
+                <td><%= "SELL NOW BUTTON" %></td>
+            </tr>
+        <% end %>
+
+    </tbody>
+</table>

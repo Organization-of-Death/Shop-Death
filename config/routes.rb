@@ -25,6 +25,14 @@ Rails.application.routes.draw do
   get 'item/edit', as: 'edit_item'
   get 'item/:id', to: 'item#show', as: 'show_item'
 
+  get 'my_market', to: 'market#index'
+  # get 'market/show'
+  # get 'market/new'
+  # get 'market/edit'
+  # get 'market/create'
+  # get 'market/update'
+  # get 'market/destroy'
+
   get 'main/login'
   post 'main/login'
   get 'main/user_item'
