@@ -67,6 +67,9 @@ class MainController < ApplicationController
         Item.connection
         User.connection
         whoare = User.find_by username: session["username"]
+        if(whoare == nil)
+          return redirect_to main_login_path, notice:'you must login first'
+        end
         @Name = whoare.username
   
     end

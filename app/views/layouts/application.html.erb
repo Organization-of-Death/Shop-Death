@@ -13,9 +13,15 @@
   </head>
 
   <body>
-  
+  <% User.connection %>
   <% if session[:username] == nil %>
-    
+  <% else %>
+    <% @whoare = User.find_by username: session["username"] %>
+  <% end %>
+  <% if session[:username] == nil %>
+
+  <% elsif @whoare == nil %>
+
   <% else %>
     <%if session[:usertype] == 0 %>
      <%= render 'layouts/navbar0' %>
