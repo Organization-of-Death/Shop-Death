@@ -21,8 +21,6 @@ class MarketController < ApplicationController
       redirect_to my_market_path, notice:'must be seller to add items for sell'
     end
 
-    
-
     @market = Market.new(
       item_id: params[:item_id],
       price: params[:price].to_d,
@@ -32,19 +30,29 @@ class MarketController < ApplicationController
 
     respond_to do |format|
       if @market.save
-        puts 'save success ja'
         format.html { redirect_to my_market_path, notice: "Market was successfully created." }
       else
-        format.html { render :index, status: :unprocessable_entity }
+        # format.html { render :index, status: :unprocessable_entity }
       end
     end
 
   end
   
   def edit
+    @market = Market.find(params[:market_id])
   end
 
   def update
+    @market = Market.find(params[:market_id])
+
+    respond_to do |format|
+      if @market.update(price: params[:price].to_d, stock: params[:stock].to_i)
+        format.html { redirect_to my_market_path, notice: "Market was successfully updated." }
+      else
+        # format.html { render :index, status: :unprocessable_entity }
+      end
+    end
+    
   end
 
   def destroy

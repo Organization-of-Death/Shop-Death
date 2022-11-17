@@ -28,9 +28,9 @@ Rails.application.routes.draw do
   get 'my_market', to: 'market#index', as: 'my_market'
   get 'my_market/new', to: 'market#new', as: 'new_market'
   post 'my_market/create', to: 'market#create', as: 'create_market'
+  get 'market/edit', to: 'market#edit', as: 'edit_market'
+  post 'market/update', to: 'market#update', as: 'update_market'
   # get 'market/show'
-  # get 'market/edit'
-  # get 'market/update'
   # get 'market/destroy'
 
   get 'main/login'

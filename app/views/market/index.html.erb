@@ -24,7 +24,7 @@
                 <td><%= "IMAGE TAG" %></td>
                 <td><%= m.price %></td>
                 <td><%= m.stock %></td>
-                <td><%= "EDIT BTN" %></td>
+                <td><%= link_to "EDIT", edit_market_path(market_id: m.id) %></td>
                 <td><%= "DELETE BTN" %></td>
             </tr>
         <% end %>
