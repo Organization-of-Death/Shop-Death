@@ -30,8 +30,8 @@ Rails.application.routes.draw do
   post 'my_market/create', to: 'market#create', as: 'create_market'
   get 'market/edit', to: 'market#edit', as: 'edit_market'
   post 'market/update', to: 'market#update', as: 'update_market'
+  delete 'market/destroy/:id', to: 'market#destroy', as: 'destroy_market'
   # get 'market/show'
-  # get 'market/destroy'
 
   get 'main/login'
   post 'main/login'

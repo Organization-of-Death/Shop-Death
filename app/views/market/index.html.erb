@@ -25,7 +25,8 @@
                 <td><%= m.price %></td>
                 <td><%= m.stock %></td>
                 <td><%= link_to "EDIT", edit_market_path(market_id: m.id) %></td>
-                <td><%= "DELETE BTN" %></td>
+                <td><%= button_to "Delete", destroy_market_path(id: m.id), method: :delete %></td>
+                
             </tr>
         <% end %>
         <% if @markets.size == 0 %>
@@ -48,7 +49,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr><td>God doesn't have anything for you to sell yo</td></tr>
+        <% if @items.size == 0 %>
+            <tr><td>admin added no items</td></tr>
+        <% end %>
 
         <% @items.each do |i| %>
             <tr>

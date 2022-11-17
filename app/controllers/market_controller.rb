@@ -16,7 +16,6 @@ class MarketController < ApplicationController
 
   def create
     # if not seller redirect to their home
-    puts 'in create ja'
     if session[:usertype] != 1
       redirect_to my_market_path, notice:'must be seller to add items for sell'
     end
@@ -52,10 +51,17 @@ class MarketController < ApplicationController
         # format.html { render :index, status: :unprocessable_entity }
       end
     end
-    
+
   end
 
   def destroy
+    puts 'in destroy'
+    puts params.to_s
+
+    @market = Market.find(params[:id])
+    @market.destroy
+    redirect_to my_market_path, notice: "Market was successfully destroyed."
+    
   end
 
 end
