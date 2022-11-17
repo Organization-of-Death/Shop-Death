@@ -92,6 +92,11 @@ class MainController < ApplicationController
       else
         newitem.enable = false
       end
+
+      if params[:picture]
+        newitem.picture.attach(params[:picture])
+      end
+
       newitem.save
       redirect_to controller: 'item', action: 'index'
       # redirect_to controller:'main',action:'user_item', Username: session['username']

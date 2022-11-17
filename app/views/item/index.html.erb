@@ -29,7 +29,7 @@
                 <% else %>
                   <td><%= button_to "Enable", set_enable_path(item_id: item.id, enable: true), method: :post, class: 'btn btn-success'%></td>
                 <% end %>
-                <td><%= "IMAGE TAG" %></td>
+                <td><%= image_tag rails_blob_path(item.picture, disposition: :attachment) %></td>
                 <td><%= link_to "Show", show_item_path(item.id), class: 'btn btn-primary' %></td>
             </tr>
         <% end %>

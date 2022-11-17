@@ -11,6 +11,9 @@
     <%= form.radio_button "enable", 'yes' %>Yes
     <%= form.radio_button "enable", 'no' %>No
     <br>
+    <%= form.label :picture, style: "display: block" %>
+    <%= form.file_field :picture %>
     <%= form.hidden_field :username,value:@User%>
     <%= form.submit "Create" %>
 <% end %>
+<%= link_to "CANCEL", item_index_path %>

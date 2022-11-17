@@ -11,6 +11,10 @@
     <%= form.radio_button "enable", 'yes', checked: @enable %>Yes
     <%= form.radio_button "enable", 'no', checked: !@enable %>No
     <br>
+    <%= form.label :picture, style: "display: block" %>
+    <%= form.file_field :picture %>
     <%= form.hidden_field :item_id,value:@Item%>
     <%= form.submit "Done" %>
 <% end %>
+
+<%= link_to "CANCEL", item_index_path %>
