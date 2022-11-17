@@ -25,11 +25,11 @@ Rails.application.routes.draw do
   get 'item/edit', as: 'edit_item'
   get 'item/:id', to: 'item#show', as: 'show_item'
 
-  get 'my_market', to: 'market#index'
+  get 'my_market', to: 'market#index', as: 'my_market'
+  get 'my_market/new', to: 'market#new', as: 'new_market'
+  post 'my_market/create', to: 'market#create', as: 'create_market'
   # get 'market/show'
-  # get 'market/new'
   # get 'market/edit'
-  # get 'market/create'
   # get 'market/update'
   # get 'market/destroy'
 

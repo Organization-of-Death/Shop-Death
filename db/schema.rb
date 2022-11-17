@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_160532) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "username"
+    t.string "username" # this must be unique
     t.string "password"
     t.integer "user_type"
     t.datetime "created_at", null: false

@@ -8,11 +8,11 @@
             <th>Item_ID</th>
             <th>Name</th>
             <th>Category</th>
+            <th>Picture</th>
             <th>Price</th>
             <th>Stock</th>
-            <th>Picture</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <!-- <th>Edit</th> -->
+            <!-- <th>Delete</th> -->
         </tr>
     </thead>
     <tbody>
@@ -21,15 +21,16 @@
                 <td><%= m.item_id %></td>
                 <td><%= m.get_item_name %></td>
                 <td><%= m.get_item_category %></td>
-                <td><%= "SHOW OR EDIT PRICE TEXTBOX" %></td>
-                <td><%= "SHOW OR EDIT STOCK TEXTBOX" %></td>
                 <td><%= "IMAGE TAG" %></td>
+                <td><%= m.price %></td>
+                <td><%= m.stock %></td>
                 <td><%= "EDIT BTN" %></td>
                 <td><%= "DELETE BTN" %></td>
             </tr>
         <% end %>
-
-        <tr><td>Not selling anything yo</td></tr>
+        <% if @markets.size == 0 %>
+            <tr><td>Not selling anything yo</td></tr>
+        <% end %>
     </tbody>
 </table>
 
@@ -43,7 +44,7 @@
             <th>Name</th>
             <th>Category</th>
             <th>Picture</th>
-            <th>Sell Now!</th>
+            <!-- <th>Sell Now!</th> -->
         </tr>
     </thead>
     <tbody>
@@ -55,7 +56,7 @@
                 <td><%= i.name %></td>
                 <td><%= i.category %></td>
                 <td><%= "IMAGE TAG" %></td>
-                <td><%= "SELL NOW BUTTON" %></td>
+                <td><%= link_to "SELL THIS", new_market_path(item_id: i.id) %></td>
             </tr>
         <% end %>
 
