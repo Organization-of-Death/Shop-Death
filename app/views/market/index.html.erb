@@ -56,7 +56,13 @@
                 <td><%= i.id %></td>
                 <td><%= i.name %></td>
                 <td><%= i.category %></td>
-                <td><%= "IMAGE TAG" %></td>
+                <td>
+                    <% if i.picture.attached? %>
+                        <%= image_tag rails_blob_path(i.picture.variant(:thumb), disposition: :attachment) %>
+                    <% else %>
+                        <%= image_tag "nopic.png", :size => "100"%>
+                    <% end %>
+                </td>
                 <% if session[:usertype] == 1%>
                     <td><%= link_to "SELL THIS", new_market_path(item_id: i.id) %></td>
                 <% end %>

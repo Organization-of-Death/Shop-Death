@@ -4,9 +4,6 @@ class MarketController < ApplicationController
 
     whoare = User.find_by(username: session["username"]).id
     @markets = Market.where(seller_id: whoare).select {|m| m.is_enable}
-
-
-
   end
 
   def show
