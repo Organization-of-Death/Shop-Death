@@ -1,0 +1,73 @@
+<% if session[:usertype] == 1%>
+    <h2>My Markets</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item_ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Picture</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <!-- <th>Edit</th> -->
+                <!-- <th>Delete</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <% @markets.each do |m| %>
+                <tr>
+                    <td><%= m.item_id %></td>
+                    <td><%= m.get_item_name %></td>
+                    <td><%= m.get_item_category %></td>
+                    <td><%= "IMAGE TAG" %></td>
+                    <td><%= m.price %></td>
+                    <td><%= m.stock %></td>
+                    <td><%= link_to "EDIT", edit_market_path(market_id: m.id) %></td>
+                    <td><%= button_to "Delete", destroy_market_path(id: m.id), method: :delete %></td>
+                    
+                </tr>
+            <% end %>
+            <% if @markets.size == 0 %>
+                <tr><td>Not selling anything</td></tr>
+            <% end %>
+        </tbody>
+    </table>
+<br>
+<% end %>
+
+<h2>All Items</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Item_ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Picture</th>
+            <!-- <th>Sell Now!</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <% if @items.size == 0 %>
+            <tr><td>no items</td></tr>
+        <% end %>
+
+        <% @items.each do |i| %>
+            <tr>
+                <td><%= i.id %></td>
+                <td><%= i.name %></td>
+                <td><%= i.category %></td>
+                <td>
+                    <% if i.picture.attached? %>
+                        <%= image_tag rails_blob_path(i.picture.variant(:thumb), disposition: :attachment) %>
+                    <% else %>
+                        <%= image_tag "nopic.png", :size => "100"%>
+                    <% end %>
+                </td>
+                <% if session[:usertype] == 1%>
+                    <td><%= link_to "SELL THIS", new_market_path(item_id: i.id) %></td>
+                <% end %>
+            </tr>
+        <% end %>
+
+    </tbody>
+</table>

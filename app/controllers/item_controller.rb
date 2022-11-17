@@ -10,6 +10,7 @@ class ItemController < ApplicationController
 
     @name = item.name
     @category = item.category
+    @enable = item.enable
     # @price = @item.price
     # @stock = @item.stock
 
@@ -17,6 +18,16 @@ class ItemController < ApplicationController
 
   def index
     @items = Item.all
+  end
+
+  def set_enable
+    item = Item.find_by id: params['item_id']
+
+    if item.update(enable: params['enable'].to_s)
+      redirect_to item_index_path, notice: "Item was successfully updated."
+    else
+      redirect_to item_index_path, notice: "Update Error."
+    end
   end
 
   def show

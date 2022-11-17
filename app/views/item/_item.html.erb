@@ -1,5 +1,10 @@
 <div id="<%= dom_id item %>">
   <p>
+    <strong>ID:</strong>
+    <%= item.id %>
+  </p>
+  
+  <p>
     <strong>Name:</strong>
     <%= item.name %>
   </p>
@@ -8,5 +13,7 @@
     <strong>Category:</strong>
     <%= item.category %>
   </p>
+
+  <%= image_tag rails_blob_path(item.picture, disposition: :attachment) %>
 
 </div>

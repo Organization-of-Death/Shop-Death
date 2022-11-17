@@ -1,0 +1,25 @@
+<h1>Market#edit</h1>
+<p>Find me in app/views/market/edit.html.erb</p>
+<h3>Item_ID</h3>
+<p><%= @market.item_id %></p>
+
+<h3>Name</h3>
+<p><%= @market.get_item_name %></p>
+
+<h3>Category</h3>
+<p><%= @market.get_item_category %></p>
+
+<h3>Image</h3>
+<%= "IMAGE TAG" %>
+
+<%= form_with url: update_market_path, method: 'post',data: {turbo:false} do |form| %>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.text_field :price, value: @market.price %>
+    <%= form.label :stock, style: "display: block" %>
+    <%= form.number_field :stock, in: 0...10000, value: @market.stock %>
+
+    <%= form.hidden_field :market_id, value: @market.id  %>
+    <%= form.submit "CONFIRM" %>
+<% end %>
+
+<%= link_to "CANCEL", my_market_path %>
