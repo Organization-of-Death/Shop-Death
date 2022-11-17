@@ -19,7 +19,13 @@
                     <td><%= m.item_id %></td>
                     <td><%= m.get_item_name %></td>
                     <td><%= m.get_item_category %></td>
-                    <td><%= "IMAGE TAG" %></td>
+                    <td>
+                        <% if m.item.picture.attached? %>
+                            <%= image_tag rails_blob_path(m.item.picture.variant(:thumb), disposition: :attachment) %>
+                        <% else %>
+                            <%= image_tag "nopic.png", :size => "100"%>
+                        <% end %>
+                    </td>
                     <td><%= m.price %></td>
                     <td><%= m.stock %></td>
                     <td><%= link_to "EDIT", edit_market_path(market_id: m.id) %></td>
