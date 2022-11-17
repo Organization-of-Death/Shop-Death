@@ -9,5 +9,13 @@ class Market < ApplicationRecord
         Item.find(self.item_id).category
     end
 
+    def is_enable
+        Item.find(self.item_id).enable
+    end
+
+    def is_disable
+        !self.is_enable
+    end
+
 
 end

@@ -87,6 +87,11 @@ class MainController < ApplicationController
       whoare = User.find_by username: params["username"]
       newitem.name = params['name']
       newitem.category = params['category']
+      if params['enable'] == 'yes'
+        newitem.enable = true
+      else
+        newitem.enable = false
+      end
       newitem.save
       redirect_to controller: 'item', action: 'index'
       # redirect_to controller:'main',action:'user_item', Username: session['username']
@@ -101,6 +106,11 @@ class MainController < ApplicationController
       item = Item.find_by id: params['item_id']
       item.name = params['name']
       item.category = params['category']
+      if params['enable'] == 'yes'
+        item.enable = true
+      else
+        item.enable = false
+      end
       # item.price = params['price']
       # item.stock = params['stock']
       item.save

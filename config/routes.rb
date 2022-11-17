@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'item/new', as: 'new_item'
   get 'item/edit', as: 'edit_item'
   get 'item/:id', to: 'item#show', as: 'show_item'
+  post 'item/set_enable', to: 'item#set_enable', as: 'set_enable'
 
   get 'my_market', to: 'market#index', as: 'my_market'
   get 'my_market/new', to: 'market#new', as: 'new_market'

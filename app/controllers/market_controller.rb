@@ -1,25 +1,36 @@
 class MarketController < ApplicationController
   def index # for displaying /my_market
-    @items = Item.all
+    @items = Item.all.select {|i| i.enable}
 
     whoare = User.find_by(username: session["username"]).id
-    @markets = Market.where seller_id: whoare 
+    @markets = Market.where(seller_id: whoare).select {|m| m.is_enable}
+
+
+
   end
 
   def show
   end
 
   def new
-    @items = Item.all
-    @markets = Market.all
-
     @item_for_new_market = Item.find(params[:item_id])
+    
+    # if admin has blocked
+    if @item_for_new_market.enable == false
+      redirect_to my_market_path, notice:'admin ห้ามขายแล้วจ้า ขอโทดน้า'
+    end
   end
 
   def create
     # if not seller redirect to their home
     if session[:usertype] != 1
       redirect_to my_market_path, notice:'must be seller to add items for sell'
+    end
+
+    # if admin has blocked
+    if Item.find(params[:item_id]).enable == false
+      redirect_to my_market_path, notice:'admin ห้ามขายแล้วจ้า ขอโทดน้า'
+      return
     end
 
     @market = Market.new(
@@ -41,10 +52,24 @@ class MarketController < ApplicationController
   
   def edit
     @market = Market.find(params[:market_id])
+
+    # if admin has blocked
+    if @market.is_disable
+      redirect_to my_market_path, notice:'admin ห้ามขายแล้วจ้า ขอโทดน้า'
+      return
+    end
+
+    
   end
 
   def update
     @market = Market.find(params[:market_id])
+
+    # if admin has blocked
+    if @market.is_disable
+      redirect_to my_market_path, notice:'admin ห้ามขายแล้วจ้า ขอโทดน้า'
+      return
+    end
 
     respond_to do |format|
       if @market.update(price: params[:price].to_d, stock: params[:stock].to_i)
@@ -61,9 +86,16 @@ class MarketController < ApplicationController
     puts params.to_s
 
     @market = Market.find(params[:id])
+    # if admin has blocked
+    if @market.is_disable
+      redirect_to my_market_path, notice:'admin ห้ามขายแล้วจ้า ขอโทดน้า'
+      return
+    end
+
     @market.destroy
     redirect_to my_market_path, notice: "Market was successfully destroyed."
-    
   end
+
+  
 
 end

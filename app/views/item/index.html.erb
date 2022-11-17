@@ -8,6 +8,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Category</th>
+            <th>Enable</th>
             <th>Picture</th>
             <!-- <th>Sell Now!</th> -->
         </tr>
@@ -22,11 +23,17 @@
                 <td><%= item.id %></td>
                 <td><%= item.name %></td>
                 <td><%= item.category %></td>
+                <td><%= item.enable %></td>
+                <% if item.enable %>
+                  <td><%= button_to "Disable", set_enable_path(item_id: item.id, enable: false), method: :post, class: 'btn btn-danger'%></td>
+                <% else %>
+                  <td><%= button_to "Enable", set_enable_path(item_id: item.id, enable: true), method: :post, class: 'btn btn-success'%></td>
+                <% end %>
                 <td><%= "IMAGE TAG" %></td>
-                <td><%= link_to "Show this item", show_item_path(item.id) %></td>
+                <td><%= link_to "Show", show_item_path(item.id), class: 'btn btn-primary' %></td>
             </tr>
         <% end %>
 
     </tbody>
 </table>
-<%= link_to "New item", new_item_path %>
+<%= link_to "New item", new_item_path, class: 'btn btn-primary' %>

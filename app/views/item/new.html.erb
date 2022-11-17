@@ -2,10 +2,14 @@
 <p>Find me in app/views/item/new.html.erb</p>
 <%=@User%>
 <%= form_with url: '/main/user_manage', method: :post, data:{turbo:false} do |form| %>
-    <%= form.label :query, "Name:" %>
+    <%= form.label :name, "Name:" %>
     <%= form.text_field "name",:value => params["name"],:required=>'required' %><br>
-    <%= form.label :query, "category" %>
+    <%= form.label :category, "category" %>
     <%= form.text_field "category",:value =>@category,:required=>'required' %>
+    <br>
+    <%= form.label :enable, "Enable" %>
+    <%= form.radio_button "enable", 'yes' %>Yes
+    <%= form.radio_button "enable", 'no' %>No
     <br>
     <%= form.hidden_field :username,value:@User%>
     <%= form.submit "Create" %>

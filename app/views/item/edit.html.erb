@@ -1,12 +1,15 @@
-<h1>Item#new</h1>
-<p>Find me in app/views/item/new.html.erb</p>
+<h1>Item#edit</h1>
+<p>Find me in app/views/item/edit.html.erb</p>
 
 <%= form_with url: '/main/user_manage', method: :post, data:{turbo:false} do |form| %>
     <%= form.label :query, "Name:" %>
     <%= form.text_field "name",:value => @name,:required=>'required'%><br>
     <%= form.label :query, "category" %>
     <%= form.text_field "category",:value =>@category,:required=>'required' %>
-    
+    <br>
+    <%= form.label :enable, "Enable" %>
+    <%= form.radio_button "enable", 'yes', checked: @enable %>Yes
+    <%= form.radio_button "enable", 'no', checked: !@enable %>No
     <br>
     <%= form.hidden_field :item_id,value:@Item%>
     <%= form.submit "Done" %>
