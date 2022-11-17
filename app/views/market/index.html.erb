@@ -28,7 +28,7 @@
                 </tr>
             <% end %>
             <% if @markets.size == 0 %>
-                <tr><td>Not selling anything yo</td></tr>
+                <tr><td>Not selling anything</td></tr>
             <% end %>
         </tbody>
     </table>
@@ -48,7 +48,7 @@
     </thead>
     <tbody>
         <% if @items.size == 0 %>
-            <tr><td>admin added no items</td></tr>
+            <tr><td>no items</td></tr>
         <% end %>
 
         <% @items.each do |i| %>
