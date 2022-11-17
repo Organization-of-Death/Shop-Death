@@ -1,7 +1,9 @@
 class MarketController < ApplicationController
   def index # for displaying /my_market
     @items = Item.all
-    @markets = Market.all
+
+    whoare = User.find_by(username: session["username"]).id
+    @markets = Market.where seller_id: whoare 
   end
 
   def show

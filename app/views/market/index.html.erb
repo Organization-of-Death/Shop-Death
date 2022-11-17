@@ -1,43 +1,41 @@
-<h1>Market#index</h1>
-<p>Find me in app/views/market/index.html.erb</p>
-
-<h2>You're selling</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Item_ID</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Picture</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <!-- <th>Edit</th> -->
-            <!-- <th>Delete</th> -->
-        </tr>
-    </thead>
-    <tbody>
-        <% @markets.each do |m| %>
+<% if session[:usertype] == 1%>
+    <h2>My Markets</h2>
+    <table>
+        <thead>
             <tr>
-                <td><%= m.item_id %></td>
-                <td><%= m.get_item_name %></td>
-                <td><%= m.get_item_category %></td>
-                <td><%= "IMAGE TAG" %></td>
-                <td><%= m.price %></td>
-                <td><%= m.stock %></td>
-                <td><%= link_to "EDIT", edit_market_path(market_id: m.id) %></td>
-                <td><%= button_to "Delete", destroy_market_path(id: m.id), method: :delete %></td>
-                
+                <th>Item_ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Picture</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <!-- <th>Edit</th> -->
+                <!-- <th>Delete</th> -->
             </tr>
-        <% end %>
-        <% if @markets.size == 0 %>
-            <tr><td>Not selling anything yo</td></tr>
-        <% end %>
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            <% @markets.each do |m| %>
+                <tr>
+                    <td><%= m.item_id %></td>
+                    <td><%= m.get_item_name %></td>
+                    <td><%= m.get_item_category %></td>
+                    <td><%= "IMAGE TAG" %></td>
+                    <td><%= m.price %></td>
+                    <td><%= m.stock %></td>
+                    <td><%= link_to "EDIT", edit_market_path(market_id: m.id) %></td>
+                    <td><%= button_to "Delete", destroy_market_path(id: m.id), method: :delete %></td>
+                    
+                </tr>
+            <% end %>
+            <% if @markets.size == 0 %>
+                <tr><td>Not selling anything yo</td></tr>
+            <% end %>
+        </tbody>
+    </table>
 <br>
+<% end %>
 
-<h2>sell more? check down</h2>
+<h2>All Items</h2>
 <table>
     <thead>
         <tr>
@@ -59,7 +57,9 @@
                 <td><%= i.name %></td>
                 <td><%= i.category %></td>
                 <td><%= "IMAGE TAG" %></td>
-                <td><%= link_to "SELL THIS", new_market_path(item_id: i.id) %></td>
+                <% if session[:usertype] == 1%>
+                    <td><%= link_to "SELL THIS", new_market_path(item_id: i.id) %></td>
+                <% end %>
             </tr>
         <% end %>
 
