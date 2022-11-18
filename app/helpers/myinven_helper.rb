@@ -1,0 +1,2 @@
+module MyinvenHelper
+end

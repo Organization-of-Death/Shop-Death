@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  get 'myinven/main'
+  post 'myinven/main'
+  post 'myinven/buy1'
+  get 'myinven/buy1'
+  
   get 'profile/main'
   post 'profile/main'
+  
   root 'main#welcome'
   #root 'main#login'
   post 'profile/password'
