@@ -43,4 +43,14 @@ class MyinvenController < ApplicationController
       redirect_to myinven_main_path, notice: 'Buy something first' and return
     end
   end
+
+  def purchase_history
+    whoare = User.find_by(username: session["username"]).id
+    if (session[:usertype] == 2) # for buyer view
+      @inventories = Inventory.where(buyer_id: whoare)
+    elsif (session[:usertype] == 0) # for admin view
+      @inventories = Inventory.all
+    end
+  
+  end
 end

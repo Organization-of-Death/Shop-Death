@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post 'myinven/buy1'
   get 'myinven/buy1'
   
+  get '/purchase_history', to: 'myinven#purchase_history'
+
   get 'profile/main'
   post 'profile/main'
   
