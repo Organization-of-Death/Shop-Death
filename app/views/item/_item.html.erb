@@ -13,7 +13,10 @@
     <strong>Category:</strong>
     <%= item.category %>
   </p>
-
-  <%= image_tag rails_blob_path(item.picture, disposition: :attachment) %>
+  <% if item.picture.attached? %>
+      <%= image_tag rails_blob_path(item.picture.variant(resize_to_limit: [100, 100]), disposition: :attachment) %>
+  <% else %>
+      <%= image_tag "nopic.png", :size => "100"%>
+  <% end %>
 
 </div>
