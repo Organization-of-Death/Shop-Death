@@ -1,5 +1,4 @@
-<h1>Item#new</h1>
-<p>Find me in app/views/user/new.html.erb</p>
+<h1>New User</h1>
 
 <%= form_with url: '/user/user_manage', method: :post, data:{turbo:false} do |form| %>
     <%= form.label :query, "Name:" %>
@@ -11,5 +10,5 @@
     <%= form.label :query, "User type: (0 = Admin, 1 = Seller, 2 = Buyer)",:class=>'mt-4' %>
     <%= form.number_field "usertype",:value => params['usertype'],in: 0...3,:required=>'required',:class=>'form-control' %><br>
     <br>
-    <%= form.submit "Create" %>
+    <%= form.submit "Create", class: 'btn btn-primary' %>
 <% end %>

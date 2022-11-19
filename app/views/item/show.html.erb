@@ -4,13 +4,13 @@
 <div>
     <%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
         <%= form.hidden_field :item_id, value: @item.id%>    
-        <%= form.submit "Edit",:class=>'btn btn-primary'%>
+        <%= form.submit "Edit",:class=>'btn btn-primary my-1'%>
     <%end%>
-
-    <%= link_to "Back to items", item_index_path %>
 
     <%= form_with url: '/main/user_manage', method: 'post', data: {turbo:false} do |form| %>
         <%= form.hidden_field :item_id,value:@item.id%>
-        <%= form.submit "Delete",:class=>'btn btn-primary'%>
-<%end%>
+        <%= form.submit "Delete",:class=>'btn btn-danger my-1'%>
+
+    <%end%>
+    <%= link_to "Back to items", item_index_path, class: 'btn btn-primary my-1' %>
 </div>
