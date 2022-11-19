@@ -21,6 +21,12 @@ class MyinvenController < ApplicationController
         jesus = true
         
         market = Market.find_by id: params["market_id#{i}"]
+        puts 'dddddddddddddddddddddd'
+        puts market.stock
+        if( market.stock - params["amount#{i}"].to_i <= 0)
+          redirect_to myinven_main_path, notice:'Buy Unsuccesfully, please refresh page' and return
+        
+        end
         market.stock -= params["amount#{i}"].to_i
         market.save
         inven = Inventory.new
@@ -36,8 +42,7 @@ class MyinvenController < ApplicationController
       end
     end
     if jesus
-      puts 'saaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-      puts Inventory.all
+    
       redirect_to myinven_main_path, notice:'Buy successfully!' and return
     else
       redirect_to myinven_main_path, notice: 'Buy something first' and return

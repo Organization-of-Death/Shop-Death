@@ -1,0 +1,32 @@
+class TopsellerController < ApplicationController
+  def main
+    Inventory.connection
+    User.connection
+    Item.connection
+    Market.connection
+    dp = Array.new(1000,0)
+    all_inven = Inventory.all
+    @show = false
+    if(params[:start] != nil )
+      sort = all_inven.where(created_at: params[:start]..params[:end])
+      @show = true
+    else
+      sort = all_inven.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+      @show = false
+    end
+      long = (sort.length) - 1
+    for i in 0..long do
+      dp[sort[i].seller_id] += sort[i].qty
+    end 
+    puts dp.max()
+    topseller = User.find_by id: dp.rindex(dp.max)
+    @topsellername = topseller.username
+    @num = dp.max()
+
+    puts 'sssssssssssssss'
+    
+  end
+  def organ
+    redirect_to controller: 'topseller', action: 'main', start: params[:start], end:params[:end]
+  end
+end
