@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'topseller/main'
+  post 'topseller/main'
+  post 'topseller/organ'
+  
   get 'myinven/main'
   post 'myinven/main'
   post 'myinven/buy1'

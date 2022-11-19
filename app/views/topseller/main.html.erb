@@ -1,0 +1,17 @@
+<h1>Topseller#main</h1>
+<%= form_with url: '/topseller/organ', method: :post, data:{turbo:false} do |form| %>
+    <%= form.label :query, "Start Date:" %>
+    <%= form.date_field "start",:value => params["start"],:required=>'required',:class=>'form-control' %><br>
+    <%= form.label :query, "Username:" %>
+  
+    <%= form.label :query, "User type: (0 = Admin, 1 = Seller, 2 = Buyer)",:class=>'mt-4' %>
+    <%= form.date_field "end",:value => params['end'],:required=>'required',:class=>'form-control' %><br>
+    <br>
+    <%= form.submit "Search" %>
+<% end %> 
+<% if @show %>
+    <h1 class= 'mt-4'> Result after search </h1>
+<% else %> 
+    <h1 class = 'mt-4'> Daily Topseller
+<%end%>
+<h1> Top seller is <%=@topsellername%> with <%=@num%> sold </h1> 
