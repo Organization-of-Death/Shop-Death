@@ -1,7 +1,8 @@
 <h1> Market </h1>
 <%= form_with url: '/myinven/buy1', method: :post, data:{turbo:false} do |form| %>
     <%= form.hidden_field :size, :value=> @size %>
-<table class='table' >
+<table id = 'markets' >
+<thead>
   <tr>
     <th>Seller Name</th>
     <th>Item Name</th>
@@ -15,6 +16,8 @@
   
     <% end %>
   </tr>
+  </thead>
+  <tbody>
 <p style="visibility:hidden;"><% for i in 0..@size do %></p>
     <% item = Item.find_by id: @all_market[i].item_id %>
     <% user = User.find_by id: @all_market[i].seller_id  %>
@@ -44,6 +47,7 @@
     <% else %>
     <% end %>
 <% end %>
+</tbody>
 </table>
 <% if session[:usertype] == 0 %>
 <% else %>
@@ -54,3 +58,9 @@
 
 <% end %> 
 
+
+<script>
+    $(document).ready( function () {
+        $('#markets').DataTable();
+    });
+</script>

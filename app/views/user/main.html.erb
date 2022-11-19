@@ -1,6 +1,7 @@
 <h1>User#main</h1>
 <p>Find me in app/views/user/main.html.erb</p>
-<table class='table' >
+<table id='users'>
+<thead>
   <tr>
     <th>ID</th>
     <th>Username</th>
@@ -9,6 +10,8 @@
     <th>Edit</th>
     <th>Delete</th>
   </tr>
+  </thead>
+    <tbody>
 <p style="visibility:hidden;"><% for i in 0..@size do %></p>
     <tr>
     <td><%=@all_user[i].id%></td>
@@ -29,8 +32,15 @@
     </td>
     </tr>
 <% end %>
+</tbody>
 </table>
 <%= form_with url: '/user/user_manage', method: 'post', data: {turbo:false} do |form| %>
     <%= form.hidden_field :username,value:@Username%>
     <%= form.submit "New",:class=>'btn btn-primary'%>
 <%end%>
+
+<script>
+    $(document).ready( function () {
+        $('#users').DataTable();
+    });
+</script>

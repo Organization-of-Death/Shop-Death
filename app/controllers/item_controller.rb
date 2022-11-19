@@ -18,15 +18,19 @@ class ItemController < ApplicationController
 
   def index
     @items = Item.all
+    puts '-indexjaaa'
   end
 
   def set_enable
     item = Item.find_by id: params['item_id']
 
     if item.update(enable: params['enable'].to_s)
-      redirect_to item_index_path, notice: "Item was successfully updated."
+      # index
+      redirect_to item_index_path, notice: "Update success"
+      return
     else
       redirect_to item_index_path, notice: "Update Error."
+      return
     end
   end
 

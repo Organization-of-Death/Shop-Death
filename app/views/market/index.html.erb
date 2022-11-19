@@ -1,6 +1,6 @@
 <% if session[:usertype] == 1%>
     <h2>My Markets</h2>
-    <table>
+    <table id='markets'>
         <thead>
             <tr>
                 <th>Item_ID</th>
@@ -28,8 +28,8 @@
                     </td>
                     <td><%= m.price %></td>
                     <td><%= m.stock %></td>
-                    <td><%= link_to "EDIT", edit_market_path(market_id: m.id) %></td>
-                    <td><%= button_to "Delete", destroy_market_path(id: m.id), method: :delete %></td>
+                    <td><%= link_to "EDIT", edit_market_path(market_id: m.id), class: 'btn btn-primary' %></td>
+                    <td><%= button_to "Delete", destroy_market_path(id: m.id), method: :delete, class: 'btn btn-danger' %></td>
                     
                 </tr>
             <% end %>
@@ -42,7 +42,7 @@
 <% end %>
 
 <h2>All Items</h2>
-<table>
+<table id='items'>
     <thead>
         <tr>
             <th>Item_ID</th>
@@ -70,10 +70,17 @@
                     <% end %>
                 </td>
                 <% if session[:usertype] == 1%>
-                    <td><%= link_to "SELL THIS", new_market_path(item_id: i.id) %></td>
+                    <td><%= link_to "SELL THIS", new_market_path(item_id: i.id), class: 'btn btn-primary' %></td>
                 <% end %>
             </tr>
         <% end %>
 
     </tbody>
 </table>
+
+<script>
+    $(document).ready( function () {
+        $('#markets').DataTable();
+        $('#items').DataTable();
+    });
+</script>
