@@ -1,6 +1,6 @@
 <h1>Purchase History</h1>
 
-<table>
+<table id='purchase-history'>
         <thead>
             <tr>
                 <% if session[:usertype] == 0 %>
@@ -44,3 +44,9 @@
             <% end %>
         </tbody>
     </table>
+
+<script>
+    $(document).ready( function () {
+        $('#purchase-history').DataTable();
+    });
+</script>

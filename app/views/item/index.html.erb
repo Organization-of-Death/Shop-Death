@@ -2,7 +2,7 @@
 
 <h1>All Items</h1>
 
-<table>
+<table id='items'>
     <thead>
         <tr>
             <th>ID</th>
@@ -10,7 +10,8 @@
             <th>Category</th>
             <th>Enable</th>
             <th>Picture</th>
-            <!-- <th>Sell Now!</th> -->
+            <th></th><!-- for datatable -->
+            <th></th><!-- for datatable -->
         </tr>
     </thead>
     <tbody>
@@ -43,3 +44,10 @@
     </tbody>
 </table>
 <%= link_to "New item", new_item_path, class: 'btn btn-primary' %>
+
+
+<script>
+    $(document).ready( function () {
+        $('#items').DataTable();
+    });
+</script>

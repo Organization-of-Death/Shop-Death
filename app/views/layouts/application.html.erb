@@ -10,8 +10,8 @@
     
     <!-- for Datatables-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -38,9 +38,10 @@
   <% end %>
   <div class='container'>
   <% flash.each do |type,msg| %>
-    <h5 style='color:red' class= 'mt-2'> 
-      <%=msg%> 
-    </h5>
+    <div class="alert alert-info">
+      <%= msg %>  <!-- need to somehow fix this so that in /item it displays only once-->
+      <%= flash.discard(msg) %>
+    </div>
     <%end%>
   
     <%= yield %>

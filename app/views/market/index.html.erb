@@ -1,6 +1,6 @@
 <% if session[:usertype] == 1%>
     <h2>My Markets</h2>
-    <table>
+    <table id='markets'>
         <thead>
             <tr>
                 <th>Item_ID</th>
@@ -42,7 +42,7 @@
 <% end %>
 
 <h2>All Items</h2>
-<table>
+<table id='items'>
     <thead>
         <tr>
             <th>Item_ID</th>
@@ -77,3 +77,10 @@
 
     </tbody>
 </table>
+
+<script>
+    $(document).ready( function () {
+        $('#markets').DataTable();
+        $('#items').DataTable();
+    });
+</script>
