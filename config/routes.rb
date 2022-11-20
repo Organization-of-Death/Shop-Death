@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'user/edit'
   get 'user/new'
 
-  get 'main/home'
+  get 'main/home', as: 'main_home'
   post 'main/home'
   post 'main/log_out'
   post 'shop/item_manage'

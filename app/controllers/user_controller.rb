@@ -1,4 +1,6 @@
 class UserController < ApplicationController
+  before_action :must_logged_in_as_admin, only: [:main, :new, :edit]
+
   def main
     User.connection
     @all_user = User.all

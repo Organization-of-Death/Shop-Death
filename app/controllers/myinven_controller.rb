@@ -1,4 +1,13 @@
+# this class handles the /my_market routes && purchase_history
+# but handles the Inventory Model
+
 class MyinvenController < ApplicationController
+  before_action do
+    puts 'baka'
+    must_logged_in_as_one_of [0, 2] # must be roles admin(0), or buyer(2) to access
+    # :must_logged_in_as_one_of [0, 1] # note: this syntax fails
+  end
+
   def main
     Market.connection
     User.connection

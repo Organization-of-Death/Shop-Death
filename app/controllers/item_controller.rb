@@ -1,4 +1,5 @@
 class ItemController < ApplicationController
+  before_action :must_logged_in_as_admin
   before_action :set_item, only: %i[ show ]
   def new
     @User = params[:Username]

@@ -1,4 +1,13 @@
+# this class handles the /my_inventory routes
+# but handles the Market Model
+
 class MarketController < ApplicationController
+  before_action do
+    puts 'baka'
+    must_logged_in_as_one_of [0, 1] # must be roles admin(0), or seller(1) to access
+    # :must_logged_in_as_one_of [0, 1] # note: this syntax fails
+  end
+
   def index # for displaying /my_market
     @items = Item.all.select {|i| i.enable}
 
