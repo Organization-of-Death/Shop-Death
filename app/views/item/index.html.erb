@@ -15,10 +15,11 @@
         </tr>
     </thead>
     <tbody>
-        <% if @items.size == 0 %>
-            <tr><td>no items</td></tr>
-        <% end %>
-
+        <!--
+            <% if @items.size == 0 %>
+                <tr><td>no items</td></tr>
+            <% end %>
+        -->
         <% @items.each do |item| %>
             <tr>
                 <td><%= item.id %></td>
