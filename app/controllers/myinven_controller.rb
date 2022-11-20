@@ -3,8 +3,8 @@ class MyinvenController < ApplicationController
     Market.connection
     User.connection
     Item.connection
-    @all_enable_market = Market.all.select {|m| m.is_enable}
-    @size =@all_enable_market.length-1
+    @all_market = Market.all.select {|m| m.is_enable}
+    @size =@all_market.length-1
     Inventory.connection
    
    

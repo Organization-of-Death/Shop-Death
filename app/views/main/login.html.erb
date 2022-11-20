@@ -15,6 +15,6 @@
     <%= form.submit "Login",:class=>'btn btn-primary' %>
 <% end %>
 <%= form_with url: '/main/register', method: :post, data:{turbo:false} do |form| %>
-    <%= form.submit "Register" %>
+    <%= form.submit "Register", class: 'btn btn-secondary my-1' %>
 <% end %>
 
