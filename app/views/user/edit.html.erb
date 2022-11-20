@@ -1,4 +1,4 @@
-<h1>Item#new</h1>
+
 <p>Find me in app/views/user/edit.html.erb</p>
 
 <%= form_with url: '/user/user_manage', method: :post, data:{turbo:false} do |form| %>
@@ -10,6 +10,7 @@
     <%= form.password_field "password",:value =>params["password"] ,:required=>'required',:class=>'form-control'%>
     <%= form.label :query, "User type: (0 = Admin, 1 = Seller, 2 = Buyer)",:class=>'mt-4' %>
     <%= form.number_field "usertype",:value => params['usertype'],in: 0...3,:required=>'required',:class=>'form-control',:placeholder => @username.user_type %><br>
+    <%= form.hidden_field :id,value:@username.id%>    
     <br>
     <%= form.submit "Save" %>
 <% end %>

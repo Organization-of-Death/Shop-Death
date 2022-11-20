@@ -23,7 +23,8 @@ class MainController < ApplicationController
       if whoare == nil
         redirect_to main_login_path, notice:'This username is not exist'
       else 
-        if whoare.password != params["password"]
+        if (!whoare.authenticate(params[:password]))
+          puts 'sssssssssssssssssssss'
           redirect_to main_login_path, notice:'Wrong password or username!'
         else #normal case
           @Name = whoare.username

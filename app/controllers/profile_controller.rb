@@ -8,10 +8,10 @@ class ProfileController < ApplicationController
       
     end
     if(params[:commit] == 'Confirm')
-      if(params[:oldpassword] != @user.password)
+      if(!@user.authenticate(params[:oldpassword]))
         flash[:notice] = 'Wrong password!'
         redirect_to controller: 'profile', action: 'main' , something: 'else'
-      elsif(params[:newpassword] == @user.password)
+      elsif(@user.authenticate(params[:newpassword]))
         flash[:notice] = 'อย่าทำแบบนี้นะขอร้อง'
         redirect_to controller: 'profile', action: 'main' , something: 'else'
       else 

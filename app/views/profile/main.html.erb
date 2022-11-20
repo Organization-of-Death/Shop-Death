@@ -3,7 +3,7 @@
     <h4 >Name: <%=@user.name%>  </h4>
     <h4 > Username: <%=@user.username%>  </h4>
     <h4 >User Type: <%=@user.user_type%> </h4>
-    <h4 >Password: <%=@user.password%> </h4>
+    <h4 >Password: <%=@user.password_digest%> </h4>
     <% if !@show%>
         <%= button_to "New Password", profile_password_path,:class => 'btn btn-primary',:method => :post %>
     <%end%>
