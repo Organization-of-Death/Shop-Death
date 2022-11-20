@@ -21,12 +21,22 @@ class TopsellerController < ApplicationController
       dp[sort[i].seller_id] += sort[i].qty
     end 
     puts dp.max()
-    topseller = User.find_by id: dp.rindex(dp.max)
-    @topsellername = topseller.username
-    @num = dp.max()
-    topseller2 = User.find_by id: ap.rindex(ap.max)
-    @topsellername2 = topseller2.username
-    @num2 = ap.max()
+    if (dp.max()>0 )
+      topseller = User.find_by id: dp.rindex(dp.max)
+      @topsellername = topseller.username
+      @num = dp.max()
+    else
+      @topseller = no record yet
+      @num = 0
+    end
+    if(ap.max()>0)
+      topseller2 = User.find_by id: ap.rindex(ap.max)
+      @topsellername2 = topseller2.username
+      @num2 = ap.max()
+    else 
+      @topseller2 = no record yet
+      @num2 = 0
+    end
 
     puts 'sssssssssssssss'
     
