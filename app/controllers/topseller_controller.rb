@@ -26,7 +26,7 @@ class TopsellerController < ApplicationController
       @topsellername = topseller.username
       @num = dp.max()
     else
-      @topseller = no record yet
+      @topseller = 'no record yet'
       @num = 0
     end
     if(ap.max()>0)
@@ -34,7 +34,7 @@ class TopsellerController < ApplicationController
       @topsellername2 = topseller2.username
       @num2 = ap.max()
     else 
-      @topseller2 = no record yet
+      @topseller2 = 'no record yet'
       @num2 = 0
     end
 

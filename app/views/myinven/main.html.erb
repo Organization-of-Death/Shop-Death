@@ -18,6 +18,7 @@
   </tr>
   </thead>
   <tbody>
+  
 <p style="visibility:hidden;"><% for i in 0..@size do %></p>
     <% item = Item.find_by id: @all_market[i].item_id %>
     <% user = User.find_by id: @all_market[i].seller_id  %>
