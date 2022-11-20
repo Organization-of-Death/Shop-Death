@@ -5,6 +5,7 @@ class TopsellerController < ApplicationController
     Item.connection
     Market.connection
     dp = Array.new(1000,0)
+    ap = Array.new(1000,0)
     all_inven = Inventory.all
     @show = false
     if(params[:start] != nil )
@@ -16,12 +17,16 @@ class TopsellerController < ApplicationController
     end
       long = (sort.length) - 1
     for i in 0..long do
+      ap[sort[i].seller_id] += sort[i].qty * sort[i].price
       dp[sort[i].seller_id] += sort[i].qty
     end 
     puts dp.max()
     topseller = User.find_by id: dp.rindex(dp.max)
     @topsellername = topseller.username
     @num = dp.max()
+    topseller2 = User.find_by id: ap.rindex(ap.max)
+    @topsellername2 = topseller2.username
+    @num2 = ap.max()
 
     puts 'sssssssssssssss'
     

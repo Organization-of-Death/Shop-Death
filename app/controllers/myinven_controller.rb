@@ -23,7 +23,7 @@ class MyinvenController < ApplicationController
         market = Market.find_by id: params["market_id#{i}"]
         puts 'dddddddddddddddddddddd'
         puts market.stock
-        if( market.stock - params["amount#{i}"].to_i <= 0)
+        if( market.stock - params["amount#{i}"].to_i < 0)
           redirect_to myinven_main_path, notice:'Buy Unsuccesfully, please refresh page' and return
         
         end
