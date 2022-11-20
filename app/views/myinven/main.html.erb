@@ -37,11 +37,10 @@
         <td><%=@all_market[i].price%></td>
         <% if session[:usertype] == 0 %>
         <% else %>
-                 <td>
+                <td>
                     <%= form.number_field "amount#{i}",:value => params['amount#{i}'],in: 1...(@all_market[i].stock+1),:class=>'form-control' %>
                     <%= form.hidden_field "market_id#{i}", :value=> @all_market[i].id %>
                 </td>
-            
         <% end %>
         </tr>
     <% else %>
@@ -52,7 +51,7 @@
 <% if session[:usertype] == 0 %>
 <% else %>
     <div class = 'col text-center'>
-    <%= form.submit "Buy",:class=>'btn btn-lg btn-primary' %>
+        <%= form.submit "Buy",:class=>'btn btn-lg btn-primary' %>
     </div>
 <% end %>
 
