@@ -12,7 +12,7 @@
 <h3>Image</h3>
 <%= "IMAGE TAG" %>
 
-<%= form_with url: update_market_path, method: 'post',data: {turbo:false} do |form| %>
+<%= form_with url: update_my_inventory_path, method: 'post',data: {turbo:false} do |form| %>
     <%= form.label :price, style: "display: block" %>
     <%= form.text_field :price, value: @market.price %>
     <%= form.label :stock, style: "display: block" %>
@@ -22,4 +22,4 @@
     <%= form.submit "CONFIRM" %>
 <% end %>
 
-<%= link_to "CANCEL", my_market_path %>
+<%= link_to "CANCEL", my_inventory_path %>

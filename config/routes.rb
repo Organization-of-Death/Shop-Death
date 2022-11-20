@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   post 'topseller/main'
   post 'topseller/organ'
   
-  get 'myinven/main'
-  post 'myinven/main'
-  post 'myinven/buy1'
-  get 'myinven/buy1'
+  get 'my_market', to: 'myinven#main'
+  # post 'my_market'
+  post 'my_market/buy1'
+  # get 'my_market/buy1'
   
   get '/purchase_history', to: 'myinven#purchase_history'
 
@@ -38,12 +38,12 @@ Rails.application.routes.draw do
   get 'item/:id', to: 'item#show', as: 'show_item'
   post 'item/set_enable', to: 'item#set_enable', as: 'set_enable'
 
-  get 'my_market', to: 'market#index', as: 'my_market'
-  get 'my_market/new', to: 'market#new', as: 'new_market'
-  post 'my_market/create', to: 'market#create', as: 'create_market'
-  get 'market/edit', to: 'market#edit', as: 'edit_market'
-  post 'market/update', to: 'market#update', as: 'update_market'
-  delete 'market/destroy/:id', to: 'market#destroy', as: 'destroy_market'
+  get 'my_inventory', to: 'market#index', as: 'my_inventory'
+  get 'my_inventory/new', to: 'market#new', as: 'new_my_inventory'
+  post 'my_inventory/create', to: 'market#create', as: 'create_my_inventory'
+  get 'my_inventory/edit', to: 'market#edit', as: 'edit_my_inventory'
+  post 'my_inventory/update', to: 'market#update', as: 'update_my_inventory'
+  delete 'my_inventory/destroy/:id', to: 'market#destroy', as: 'destroy_my_inventory'
   # get 'market/show'
 
   get 'main/login'
