@@ -10,7 +10,11 @@
 <p><%= @market.get_item_category %></p>
 
 <h3>Image</h3>
-<%= "IMAGE TAG" %>
+<% if @market.item.picture.attached? %>
+      <%= image_tag rails_blob_path(@market.item.picture.variant(resize_to_limit: [100, 100]), disposition: :attachment) %>
+<% else %>
+    <%= image_tag "nopic.png", :size => "100"%>
+<% end %>
 
 <%= form_with url: update_my_inventory_path, method: 'post',data: {turbo:false} do |form| %>
     <%= form.label :price, style: "display: block" %>
