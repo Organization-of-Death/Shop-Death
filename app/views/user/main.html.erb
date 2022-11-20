@@ -1,3 +1,8 @@
+<% if @all_user.size ==0 %>
+<div class="d-flex justify-content-center align-items-center bg-info text-white ">
+    <p class="my-2">No data available in table</p>
+</div>
+<%else%>
 <table id='users' class="table table-striped table-bordered table-hover">
 <thead>
   <tr>
@@ -32,6 +37,7 @@
 <% end %>
 </tbody>
 </table>
+<% end %>
 <%= form_with url: '/user/user_manage', method: 'post', data: {turbo:false} do |form| %>
     <%= form.hidden_field :username,value:@Username%>
     <%= form.submit "New",:class=>'btn btn-primary'%>

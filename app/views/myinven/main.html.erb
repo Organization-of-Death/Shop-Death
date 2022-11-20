@@ -1,6 +1,13 @@
 <h1> Market </h1>
+<% if @all_market.size ==0 %>
+<div class="d-flex justify-content-center align-items-center bg-info text-white ">
+    <p class="my-2">No data available in table</p>
+</div>
+<%else%>
+
 <%= form_with url: '/my_market/buy1', method: :post, data:{turbo:false} do |form| %>
     <%= form.hidden_field :size, :value=> @size %>
+
 <table id = 'markets' class="table table-striped table-bordered table-hover" >
 <thead>
   <tr>
@@ -49,7 +56,9 @@
 <% end %>
 </tbody>
 </table>
-<% if session[:usertype] == 0 %>
+<% end %>
+
+<% if session[:usertype] == 0 || @all_market.size ==0 %>
 <% else %>
     <div class = 'col text-center'>
         <%= form.submit "Buy",:class=>'btn btn-lg btn-primary' %>
