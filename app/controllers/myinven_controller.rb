@@ -24,7 +24,7 @@ class MyinvenController < ApplicationController
         puts 'dddddddddddddddddddddd'
         puts market.stock
         if( market.stock - params["amount#{i}"].to_i < 0)
-          redirect_to myinven_main_path, notice:'Buy Unsuccesfully, please refresh page' and return
+          redirect_to my_market_main_path, notice:'Buy Unsuccesfully, please refresh page' and return
         
         end
         market.stock -= params["amount#{i}"].to_i
@@ -43,9 +43,9 @@ class MyinvenController < ApplicationController
     end
     if jesus
     
-      redirect_to myinven_main_path, notice:'Buy successfully!' and return
+      redirect_to my_market_main_path, notice:'Buy successfully!' and return
     else
-      redirect_to myinven_main_path, notice: 'Buy something first' and return
+      redirect_to my_market_main_path, notice: 'Buy something first' and return
     end
   end
 

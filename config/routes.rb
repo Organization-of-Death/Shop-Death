@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   post 'topseller/main'
   post 'topseller/organ'
   
-  get 'my_market', to: 'myinven#main'
+  get 'my_market', to: 'myinven#main', as: 'my_market_main'
   # post 'my_market'
-  post 'my_market/buy1'
+  post 'my_market/buy1', to: 'myinven#buy1'
   # get 'my_market/buy1'
   
   get '/purchase_history', to: 'myinven#purchase_history'
