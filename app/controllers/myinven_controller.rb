@@ -2,13 +2,18 @@
 # but handles the Inventory Model
 
 class MyinvenController < ApplicationController
-  before_action do
+  before_action only: [:main, :buy1, :purchase_history] do
     puts 'baka'
     must_logged_in_as_one_of [0, 2] # must be roles admin(0), or buyer(2) to access
     # :must_logged_in_as_one_of [0, 1] # note: this syntax fails
   end
 
-  def main
+  before_action only: [:sale_history] do
+    puts 'kaba'
+    must_logged_in_as_one_of [0, 1] # must be roles admin(0), or buyer(2) to access
+  end
+
+  def main  # this is for /my_market page
     Market.connection
     User.connection
     Item.connection
@@ -65,6 +70,15 @@ class MyinvenController < ApplicationController
     elsif (session[:usertype] == 0) # for admin view
       @inventories = Inventory.all
     end
-  
   end
+
+  def sale_history
+    whoare = User.find_by(username: session["username"]).id
+    if (session[:usertype] == 1) # for seller view
+      @inventories = Inventory.where(seller_id: whoare)
+    elsif (session[:usertype] == 0) # for admin view
+      @inventories = Inventory.all
+    end
+  end
+
 end

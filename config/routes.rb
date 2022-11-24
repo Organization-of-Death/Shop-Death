@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'my_market/buy1', to: 'myinven#buy1'
   # get 'my_market/buy1'
   
+  get '/sale_history', to: 'myinven#sale_history'
   get '/purchase_history', to: 'myinven#purchase_history'
 
   get 'profile/main'

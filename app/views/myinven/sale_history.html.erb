@@ -1,0 +1,53 @@
+<h1>Sale History</h1>
+<% if @inventories.size ==0 %>
+<div class="d-flex justify-content-center align-items-center bg-info text-white ">
+    <p class="my-2">No data available in table</p>
+</div>
+<%else%>
+<table id='sale-history' class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <% if session[:usertype] == 0 %>
+                <th>Seller Id</th>
+            <% end %>
+            <th>Item_ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Picture</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Buyer Name</th>
+            <th>Sold At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @inventories.each do |inven| %>
+            <tr>
+                <% if session[:usertype] == 0 %>
+                    <td><%= inven.seller_id %></td>
+                <% end %>
+                <td><%= inven.item_id %></td>
+                <td><%= inven.get_item_name %></td>
+                <td><%= inven.get_item_category %></td>
+                <td>
+                    <% if inven.item.picture.attached? %>
+                        <%= image_tag rails_blob_path(inven.item.picture.variant(:thumb), disposition: :attachment) %>
+                    <% else %>
+                        <%= image_tag "nopic.png", :size => "100"%>
+                    <% end %>
+                </td>
+                <td><%= inven.price %></td>
+                <td><%= inven.qty %></td>
+                <td><%= inven.get_buyer_name %></td>
+                <td><%= inven.created_at %></td>    
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% end %>
+
+<script>
+    $(document).ready( function () {
+        $('#Sale-history').DataTable();
+    });
+</script>
