@@ -1,60 +1,59 @@
 <% if session[:usertype] == 1%>
     <h2>My Markets</h2>
-<% if @markets.size ==0 %>
-<div class="d-flex justify-content-center align-items-center bg-info text-white ">
-    <p class="my-2">No data available in table</p>
-</div>
-<%else%>
-<table id='markets' class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Item_ID</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Picture</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <!-- <th>Edit</th> -->
-                <!-- <th>Delete</th> -->
-            </tr>
-        </thead>
-        <tbody>
-            <% @markets.each do |m| %>
-                <tr>
-                    <td><%= m.item_id %></td>
-                    <td><%= m.get_item_name %></td>
-                    <td><%= m.get_item_category %></td>
-                    <td>
-                        <% if m.item.picture.attached? %>
-                            <%= image_tag rails_blob_path(m.item.picture.variant(:thumb), disposition: :attachment) %>
-                        <% else %>
-                            <%= image_tag "nopic.png", :size => "100"%>
-                        <% end %>
-                    </td>
-                    <td><%= m.price %></td>
-                    <td><%= m.stock %></td>
-                    <td><%= link_to "EDIT", edit_my_inventory_path(market_id: m.id), class: 'btn btn-primary' %></td>
-                    <td><%= button_to "Delete", destroy_my_inventory_path(id: m.id), method: :delete, class: 'btn btn-danger' %></td>
-                    
-                </tr>
-            <% end %>
-            <!-- 
-            <% if @markets.size == 0 %>
-                <tr>
-                    <td>nothing to display</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            <% end %>
-            -->
-        </tbody>
-    </table>
-<% end %>
-
-<br>
+    <% if @markets.size ==0 %>
+    <div class="d-flex justify-content-center align-items-center bg-info text-white ">
+        <p class="my-2">No data available in table</p>
+    </div>
+    <%else%>
+        <table id='markets' class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Item_ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Picture</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @markets.each do |m| %>
+                        <tr>
+                            <td><%= m.item_id %></td>
+                            <td><%= m.get_item_name %></td>
+                            <td><%= m.get_item_category %></td>
+                            <td>
+                                <% if m.item.picture.attached? %>
+                                    <%= image_tag rails_blob_path(m.item.picture.variant(:thumb), disposition: :attachment) %>
+                                <% else %>
+                                    <%= image_tag "nopic.png", :size => "100"%>
+                                <% end %>
+                            </td>
+                            <td><%= m.price %></td>
+                            <td><%= m.stock %></td>
+                            <td><%= link_to "EDIT", edit_my_inventory_path(market_id: m.id), class: 'btn btn-primary' %></td>
+                            <td><%= button_to "Delete", destroy_my_inventory_path(id: m.id), method: :delete, class: 'btn btn-danger' %></td>
+                            
+                        </tr>
+                    <% end %>
+                    <!-- 
+                    <% if @markets.size == 0 %>
+                        <tr>
+                            <td>nothing to display</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <% end %>
+                    -->
+                </tbody>
+        </table>
+    <% end %>
+    <br>
 <% end %>
 
 <h2>All Items</h2>
@@ -103,10 +102,7 @@
 <script>
     $(document).ready( function () {
         if ($('#markets').length) {
-            console.log('hahahaha');
             $('#markets').DataTable();
-        } else {
-            console.log('no market ja');
         }
         $('#items').DataTable();
     });
