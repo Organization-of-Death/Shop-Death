@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
             return true
         else
             redirect_to main_login_path, notice:'you must login first'
+            return false
         end
     end
     
@@ -13,9 +14,8 @@ class ApplicationController < ActionController::Base
                 true
             else
                 redirect_to main_home_path, notice:'no permission'
+                return false
             end
-        else
-            redirect_to main_login_path, notice:'you must login first'
         end
     end
     
@@ -26,8 +26,6 @@ class ApplicationController < ActionController::Base
             else
                 redirect_to main_home_path, notice:'no permission'
             end
-        else
-            redirect_to main_login_path, notice:'you must login first'
         end
     end
     
@@ -38,8 +36,6 @@ class ApplicationController < ActionController::Base
             else
                 redirect_to main_home_path, notice:'no permission'
             end
-        else
-            redirect_to main_login_path, notice:'you must login first'
         end
     end
     
@@ -50,8 +46,6 @@ class ApplicationController < ActionController::Base
             else
                 redirect_to main_home_path, notice:'no permission'
             end
-        else
-            redirect_to main_login_path, notice:'you must login first'
         end
     end
 end

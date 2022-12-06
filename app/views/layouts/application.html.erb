@@ -20,14 +20,14 @@
   <body>
   <% User.connection %>
   <% if session[:username] == nil %>
-  <% puts '11111111111111111' %>
+  <% # puts '11111111111111111' %>
   <% else %>
     <% @whoare = User.find_by username: session["username"] %>
   <% end %>
   <% if session[:username] == nil %>
 
   <% elsif @whoare == nil %>
-  <% puts '2222222222222' %>
+  <% # puts '2222222222222' %>
   <% else %>
     <%if session[:usertype] == 0 %>
      <%= render 'layouts/navbar0' %>

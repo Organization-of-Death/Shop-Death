@@ -1,4 +1,8 @@
 class TopsellerController < ApplicationController
+  before_action do
+    must_logged_in_as_one_of [0, 1] # must be roles admin(0), or seller(1) to access
+  end
+
   def main
     Inventory.connection
     User.connection

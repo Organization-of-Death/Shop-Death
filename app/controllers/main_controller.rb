@@ -17,14 +17,14 @@ class MainController < ApplicationController
     end
     if params['commit'] == 'Login'
       User.connection
-      puts 'aaaaaaaaaaaaaaaaaaaa'
+      # puts 'aaaaaaaaaaaaaaaaaaaa'
       neware = User.new
       whoare = User.find_by username: params["username"]
       if whoare == nil
         redirect_to main_login_path, notice:'This username is not exist'
       else 
         if (!whoare.authenticate(params[:password]))
-          puts 'sssssssssssssssssssss'
+          # puts 'sssssssssssssssssssss'
           redirect_to main_login_path, notice:'Wrong password or username!'
         else #normal case
           @Name = whoare.username
@@ -41,7 +41,7 @@ class MainController < ApplicationController
       end
     elsif params['commit'] == 'Register'
       User.connection
-      puts 'aaaaaaaaaaaaaaaaaaaa'
+      # puts 'aaaaaaaaaaaaaaaaaaaa'
       neware = User.new
       whoare = User.find_by username: params["username"]
       if whoare == nil # normal case
@@ -61,7 +61,7 @@ class MainController < ApplicationController
         redirect_to main_register_path, notice:'This username is already used!!!'
       end
     else 
-      puts'sdssd'
+      # puts'sdssd'
       if(session[:username] == nil)
         return redirect_to main_login_path, notice:'you must login first'
       end
@@ -86,7 +86,7 @@ class MainController < ApplicationController
     elsif params['commit'] == 'Create'
       Item.connection
       User.connection
-      puts 'aaaaaaaaaaaaaaaaaaaa'
+      # puts 'aaaaaaaaaaaaaaaaaaaa'
       newitem = Item.new
       whoare = User.find_by username: params["username"]
       newitem.name = params['name']
@@ -164,11 +164,11 @@ class MainController < ApplicationController
   
   end
   def log_out
-    puts 'ggggggggggggg'
+    # puts 'ggggggggggggg'
     puts session[:username]
     reset_session
     redirect_to main_login_path
-    puts 'ggggggggggggg'
+    # puts 'ggggggggggggg'
     puts session[:username]
   end
   

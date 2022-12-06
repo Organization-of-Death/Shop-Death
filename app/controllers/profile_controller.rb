@@ -1,4 +1,8 @@
 class ProfileController < ApplicationController
+  before_action do
+    login?
+  end
+
   def main
     User.connection
     @user = User.find_by username:session[:username]

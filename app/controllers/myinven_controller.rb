@@ -3,13 +3,10 @@
 
 class MyinvenController < ApplicationController
   before_action only: [:main, :buy1, :purchase_history] do
-    puts 'baka'
     must_logged_in_as_one_of [0, 2] # must be roles admin(0), or buyer(2) to access
-    # :must_logged_in_as_one_of [0, 1] # note: this syntax fails
   end
 
   before_action only: [:sale_history] do
-    puts 'kaba'
     must_logged_in_as_one_of [0, 1] # must be roles admin(0), or buyer(2) to access
   end
 

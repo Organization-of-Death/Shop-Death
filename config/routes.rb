@@ -18,13 +18,13 @@ Rails.application.routes.draw do
   #root 'main#login'
   post 'profile/password'
 
-  get 'user/main'
+  get 'user/main' # where admin sees all users
   post 'user/user_manage'
   get 'user/user_manage'
   get 'user/edit'
   get 'user/new'
 
-  get 'main/home', as: 'main_home'
+  get 'main/home', as: 'main_home'  # the dashboard of each users
   post 'main/home'
   post 'main/log_out'
   post 'shop/item_manage'
