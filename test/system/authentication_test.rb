@@ -64,4 +64,23 @@ class AuthenticationTest < ApplicationSystemTestCase
       assert_selector "h1", text: "Welcome Please Login"
     end
   end
+
+  test "testAuthRouteMyMarket1" do 
+    login username: "buyer1@mail.com", password: "test_password2"
+  
+    visit 'my_market'
+    assert_selector ".h1",text: "Market"
+    sleep(5)
+   
+  end
+  
+  test "testAuthRouteMyMarket2" do 
+    login username: "test_ad1@mail.com", password: "test_password1"
+  
+    visit 'my_market'
+    assert_selector ".h1",text: "Market"
+    sleep(5)
+   
+  end
+
 end
