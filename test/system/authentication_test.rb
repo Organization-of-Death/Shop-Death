@@ -69,8 +69,8 @@ class AuthenticationTest < ApplicationSystemTestCase
     login username: "buyer1@mail.com", password: "test_password2"
   
     visit 'my_market'
-    assert_selector ".h1",text: "Market"
-    sleep(5)
+    assert_selector "h1",text: "Market"
+    
    
   end
   
@@ -78,8 +78,43 @@ class AuthenticationTest < ApplicationSystemTestCase
     login username: "test_ad1@mail.com", password: "test_password1"
   
     visit 'my_market'
-    assert_selector ".h1",text: "Market"
-    sleep(5)
+    assert_selector "h1",text: "Market"
+    
+   
+  end
+
+  test "testAuthRoutePurchaseHistory1" do 
+    login username: "buyer1@mail.com", password: "test_password2"
+  
+    visit 'purchase_history'
+    assert_selector "h1",text: "Purchase History"
+    
+   
+  end
+  
+  test "testAuthRoutePurchaseHistory2" do 
+    login username: "test_ad1@mail.com", password: "test_password1"
+  
+    visit 'purchase_history'
+    assert_selector "h1",text: "Purchase History"
+  
+   
+  end
+  test "testAuthRouteMyInventory1" do 
+    login username: "seller1@mail.com", password: "test_password3"
+  
+    visit 'my_inventory'
+    assert_selector "h2",text: "All Items"
+    
+   
+  end
+  
+  test "testAuthRouteMyInventory2" do 
+    login username: "test_ad1@mail.com", password: "test_password1"
+  
+    visit 'my_inventory'
+    assert_selector "h2",text: "All Items"
+  
    
   end
 

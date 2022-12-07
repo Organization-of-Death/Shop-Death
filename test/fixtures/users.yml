@@ -7,7 +7,12 @@ admin1:
   user_type: 0
 
 ิีิีbuyer1:
-   name: "test_buyer1"
-   username: "buyer1@mail.com"
-   password_digest:  <%= BCrypt::Password.create('test_password2') %>
-   user_type: 2
+  name: "test_buyer1"
+  username: "buyer1@mail.com"
+  password_digest:  <%= BCrypt::Password.create('test_password2') %>
+  user_type: 2
+seller1:
+  name: "test_seller1"
+  username: "seller1@mail.com"
+  password_digest:  <%= BCrypt::Password.create('test_password3') %>
+  user_type: 1
