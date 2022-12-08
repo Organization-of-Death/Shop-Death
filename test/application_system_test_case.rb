@@ -28,4 +28,20 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # click on the Login button
     click_on "Login"
   end
+
+  def login_as_admin
+    login username: users(:admin1).username, password: "test_password1"
+  end
+  
+  def login_as_buyer
+    login username: users(:buyer1).username, password: "test_password2"
+  end
+  
+  def login_as_seller
+    login username: users(:seller1).username, password: "test_password3"
+  end
+
+  def logout
+    click_on "Logout"
+  end
 end

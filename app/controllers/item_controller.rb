@@ -19,7 +19,7 @@ class ItemController < ApplicationController
 
   def index
     @items = Item.all
-    puts '-indexjaaa'
+    # puts '-indexjaaa'
   end
 
   def set_enable
