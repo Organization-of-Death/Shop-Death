@@ -23,7 +23,7 @@ class MyinvenController < ApplicationController
   end
   def buy1
 
-    puts 'saaaaaaa'
+    # puts 'saaaaaaa'
     asize =(params[:size].to_i)
     jesus = false
     for i in 0..asize do
@@ -32,7 +32,7 @@ class MyinvenController < ApplicationController
         jesus = true
         
         market = Market.find_by id: params["market_id#{i}"]
-        puts 'dddddddddddddddddddddd'
+        # puts 'dddddddddddddddddddddd'
         puts market.stock
         if( market.stock - params["amount#{i}"].to_i < 0)
           redirect_to my_market_main_path, notice:'Buy Unsuccesfully, please refresh page' and return
