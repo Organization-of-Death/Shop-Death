@@ -89,8 +89,9 @@ class AuthenticationTest < ApplicationSystemTestCase
     visit 'purchase_history'
     assert_selector "h1",text: "Purchase History"
     
-   
   end
+
+  
   
   test "testAuthRoutePurchaseHistory2" do 
     login username: "test_ad1@mail.com", password: "test_password1"
@@ -117,5 +118,33 @@ class AuthenticationTest < ApplicationSystemTestCase
   
    
   end
+  test "testAuthRouteTopSeller1" do 
+    login username: "test_ad1@mail.com", password: "test_password1"
+  
+    visit 'topseller/main'
+    assert_selector "h1",text: "Topseller#main"
+  end
+  test "testAuthRouteTopSeller2" do 
+    login username: "seller1@mail.com", password: "test_password3"
+  
+    visit 'topseller/main'
+    assert_selector "h1",text: "Topseller#main"
+  end
+
+  test "testAuthRouteUserPages1" do 
+    login username: "test_ad1@mail.com", password: "test_password1"
+  
+    visit 'user/main'
+    assert_selector "h1",text: "User"
+  end
+
+  test "testAuthRouteUserPages2" do 
+    login username: "buyer1@mail.com", password: "test_password2"
+    #test can't access
+    visit 'user/main'
+    assert_selector ".alert",text: "no permission"
+  end
+
+
 
 end

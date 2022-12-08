@@ -11,6 +11,7 @@ admin1:
   username: "buyer1@mail.com"
   password_digest:  <%= BCrypt::Password.create('test_password2') %>
   user_type: 2
+  #Wtf with this Fixture???
 seller1:
   name: "test_seller1"
   username: "seller1@mail.com"
