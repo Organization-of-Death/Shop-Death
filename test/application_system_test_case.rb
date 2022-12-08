@@ -40,4 +40,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def login_as_seller
     login username: users(:seller1).username, password: "test_password3"
   end
+
+  def logout
+    click_on "Logout"
+  end
 end

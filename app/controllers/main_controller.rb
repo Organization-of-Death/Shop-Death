@@ -165,11 +165,11 @@ class MainController < ApplicationController
   end
   def log_out
     # puts 'ggggggggggggg'
-    puts session[:username]
+    # puts session[:username]
     reset_session
     redirect_to main_login_path
     # puts 'ggggggggggggg'
-    puts session[:username]
+    # puts session[:username]
   end
   
 end
