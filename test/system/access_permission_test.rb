@@ -127,7 +127,7 @@ class AccessPermissionTest < ApplicationSystemTestCase
 
 
     visit 'item/edit?item_id=1'
-    assert_selector "h1",text: "Item#edit"
+    assert_selector "h1",text: "Item Edit"
     visit 'item/1'
     assert_selector 'strong',text:"ID:"
   end

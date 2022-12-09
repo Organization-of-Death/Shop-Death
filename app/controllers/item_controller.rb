@@ -25,7 +25,7 @@ class ItemController < ApplicationController
 
   def set_enable
     item = Item.find_by id: params['item_id']
-    if @item.nil?
+    if item.nil?
       redirect_to item_index_path, notice: "The item no longer existed" and return
     end
 
