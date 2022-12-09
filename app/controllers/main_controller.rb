@@ -3,7 +3,7 @@ class MainController < ApplicationController
   end
   def welcome # two root direction
     if(session[:username] != nil)
-      puts 'd'
+      # puts 'd'
       redirect_to main_home_path,hi:'yo' and return
     else
       redirect_to main_login_path,hi:'yo' and return
@@ -12,7 +12,7 @@ class MainController < ApplicationController
   end
   def home
     if params['hi'] == 'yo'
-      puts 'x'
+      # puts 'x'
       return
     end
     if params['commit'] == 'Login'
@@ -105,9 +105,9 @@ class MainController < ApplicationController
       redirect_to controller: 'item', action: 'index'
       # redirect_to controller:'main',action:'user_item', Username: session['username']
     elsif params['commit'] == 'Edit'
-      puts '===================='
-      puts params['item_id']
-      puts '===================='
+      # puts '===================='
+      # puts params['item_id']
+      # puts '===================='
       redirect_to controller:'item',action:'edit', item_id: params['item_id']
     elsif params['commit'] == 'Done'  # this is for submiting the item update
       Item.connection

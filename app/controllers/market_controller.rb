@@ -86,8 +86,8 @@ class MarketController < ApplicationController
   end
 
   def destroy
-    puts 'in destroy'
-    puts params.to_s
+    # puts 'in destroy'
+    # puts params.to_s
 
     @market = Market.find(params[:id])
     # if admin has blocked
