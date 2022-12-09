@@ -8,8 +8,8 @@ class TopsellerController < ApplicationController
     User.connection
     Item.connection
     Market.connection
-    dp = Array.new(1000,0)
-    ap = Array.new(1000,0)
+    dp = Array.new(10000,0) #by money made
+    ap = Array.new(10000,0) #by quantity 
     all_inven = Inventory.all
     @show = false
     if(params[:start] != nil )
@@ -21,22 +21,44 @@ class TopsellerController < ApplicationController
     end
       long = (sort.length) - 1
     for i in 0..long do
-      ap[sort[i].seller_id] += sort[i].qty * sort[i].price
-      dp[sort[i].seller_id] += sort[i].qty
+      dp[sort[i].seller_id] += sort[i].qty * sort[i].price
+      ap[sort[i].seller_id] += sort[i].qty
     end 
-    puts dp.max()
-    if (dp.max()>0 )
-      topseller = User.find_by id: dp.rindex(dp.max)
-      @topsellername = topseller.username
-      @num = dp.max()
+    newdp = dp.sort {|x, y| y <=> x} # sort descending
+
+    @listtopbyPrice = Array.new
+    @listtopPrice = Array.new
+    if (dp.max()>0 ) #need everyone to show 
+      @topsellername = "down below"
+      @num = ""
+      i = 0
+      while newdp[i]>0 do
+        topseller = User.find_by id: dp.rindex(newdp[i])
+        @listtopbyPrice.push(topseller)
+        @listtopPrice.push(newdp[i])
+        dp[dp.rindex(newdp[i])] = 0; # in case someone have the same sold total 
+        i+=1
+      end
     else
       @topsellername = 'no record yet'
       @num = 0
     end
+    
+    newap = ap.sort {|x, y| y <=> x} # sort descending
+    @listtopbyQuantity = Array.new
+    @listtopQuantity = Array.new
+    puts 'sssssssss'
     if(ap.max()>0)
-      topseller2 = User.find_by id: ap.rindex(ap.max)
-      @topsellername2 = topseller2.username
-      @num2 = ap.max()
+      @topsellername2 = "down below"
+      @num2 = ""
+      i = 0
+      while newap[i]>0 do
+        topseller = User.find_by id: ap.rindex(newap[i])
+        @listtopbyQuantity.push(topseller)
+        @listtopQuantity.push(newap[i])
+        ap[ap.rindex(newap[i])] = 0; # in case someone have the same sold total 
+        i+=1
+      end
     else 
       @topsellername2 = 'no record yet'
       @num2 = 0

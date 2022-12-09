@@ -14,5 +14,45 @@
 <% else %> 
     <h1 class = 'mt-4'> Daily Topseller
 <%end%>
-<h1> Top seller by quantity is <%=@topsellername%> with <%=@num%> sold </h1>
-<h1> Top seller by price is <%=@topsellername2%> with <%=@num2%> $ </h1>  
+<h1> Top seller by price is <%=@topsellername%> with <%=@num%> sold </h1>
+<table  class="table table-striped table-bordered table-hover">
+<thead>
+  <tr>
+    <th>Rank</th>
+    <th>Username</th>
+    <th>Name</th>
+    <th>Total Sold</th>
+  </tr>
+  </thead>
+    <tbody>
+<p><% for i in 0..(@listtopbyPrice.size-1) do %></p>
+    <tr>
+    <td><%=i+1%></td>
+    <td><%=@listtopbyPrice[i].username%></td>
+    <td><%=@listtopbyPrice[i].name%></td> 
+    <td><%=@listtopPrice[i]%></td> 
+    </tr>
+<% end %>
+</tbody>
+</table>
+<h1> Top seller by quantity is <%=@topsellername2%> with <%=@num2%> </h1> 
+<table  class="table table-striped table-bordered table-hover">
+<thead>
+  <tr>
+    <th>Rank</th>
+    <th>Username</th>
+    <th>Name</th>
+    <th>Total Sold</th>
+  </tr>
+  </thead>
+    <tbody>
+<p><% for i in 0..(@listtopbyQuantity.size-1) do %></p>
+    <tr>
+    <td><%=i+1%></td>
+    <td><%=@listtopbyQuantity[i].username%></td>
+    <td><%=@listtopbyQuantity[i].name%></td> 
+    <td><%=@listtopQuantity[i]%></td> 
+    </tr>
+<% end %>
+</tbody>
+</table> 
