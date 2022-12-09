@@ -127,7 +127,12 @@ class MainController < ApplicationController
       Item.connection
       User.connection
       item = Item.find_by id:params['item_id']
+      if item.nil?
+        flash[:notice] = "while you were blinking, some admin already deleted the item"
+        redirect_to controller: 'item', action: 'index' and return
+      end
       item.destroy
+      flash[:notice] = "delete item success"
       redirect_to controller: 'item', action: 'index'
       # redirect_to controller:'main',action:'user_item'
     else

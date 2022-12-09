@@ -25,6 +25,9 @@ class ItemController < ApplicationController
 
   def set_enable
     item = Item.find_by id: params['item_id']
+    if @item.nil?
+      redirect_to item_index_path, notice: "The item no longer existed" and return
+    end
 
     # check first if the lock_version is okay, otherwise notify the admin of the updated value
     if item.lock_version == params[:lock_version].to_i
@@ -44,7 +47,10 @@ class ItemController < ApplicationController
   private
   
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find_by id:params[:id]
+    if @item.nil?
+      redirect_to item_index_path, notice: "The item no longer existed"
+    end
   end
 
 end
