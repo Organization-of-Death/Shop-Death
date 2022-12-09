@@ -55,7 +55,12 @@ class MarketController < ApplicationController
   end
   
   def edit
-    @market = Market.find(params[:market_id])
+    @market = Market.find_by id: params[:market_id]
+
+    if @market.nil?
+      redirect_to my_inventory_path, notice:'the associated item or the market is already deleted'
+      return
+    end
 
     # if admin has blocked
     if @market.is_disable
@@ -67,7 +72,12 @@ class MarketController < ApplicationController
   end
 
   def update
-    @market = Market.find(params[:market_id])
+    @market = Market.find_by id: params[:market_id]
+
+    if @market.nil?
+      redirect_to my_inventory_path, notice:'the associated item or the market is already deleted'
+      return
+    end
 
     # if admin has blocked
     if @market.is_disable
@@ -86,10 +96,14 @@ class MarketController < ApplicationController
   end
 
   def destroy
-    # puts 'in destroy'
-    # puts params.to_s
 
-    @market = Market.find(params[:id])
+    @market = Market.find_by id: params[:id]
+
+    if @market.nil?
+      redirect_to my_inventory_path, notice:'the associated item or the market is already deleted'
+      return
+    end
+
     # if admin has blocked
     if @market.is_disable
       redirect_to my_inventory_path, notice:'admin ห้ามขายแล้วจ้า ขอโทดน้า'
