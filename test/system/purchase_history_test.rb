@@ -13,7 +13,7 @@ class PurchaseHistoryTest < ApplicationSystemTestCase
     @test_market = Market.create(                   # add 1 market
       item_id: @test_item.id,
       price: 100,
-      stock: 50,
+      stock: 500,
       seller_id: @test_seller_id
       )  
   end
@@ -21,17 +21,19 @@ class PurchaseHistoryTest < ApplicationSystemTestCase
   test "BuyAndUpdatePurchaseHistory" do
     login_as_buyer
 
+    test_amount = "77"
+
     # before buying, assert that no purchase history exist
     click_on "Purchase History"
     assert_selector "p", text: "No data available in table"
     assert_selector "td", {count: 0, text: "test_item_name"}
     assert_selector "td", {count: 0, text: "test_item_category"}
-    assert_selector "td", {count: 0, text: "7"}
-    assert_selector "td", {count: 0, text: "100.0"}
+    assert_selector "td", {count: 0, text: test_amount}
+    assert_selector "td", {count: 0, text: @test_market.price}
 
     # buy 
     visit '/my_market'
-    fill_in "amount0", with: "7"
+    fill_in "amount0", with: test_amount
     click_on "Buy"
     
     # after buying, assert notification and that a purchase history exist
@@ -39,14 +41,8 @@ class PurchaseHistoryTest < ApplicationSystemTestCase
     click_on "Purchase History"
     assert_selector "td", {count: 1, text: "test_item_name"}
     assert_selector "td", {count: 1, text: "test_item_category"}
-    assert_selector "td", {count: 1, text: "7"}
-    assert_selector "td", {count: 1, text: "100.0"}
-
-
-
-
-
+    assert_selector "td", {count: 1, text: test_amount}
+    assert_selector "td", {count: 1, text: @test_market.price}
+    assert_selector "td", {count: 1, text: users(:seller1).name}
   end
-
-
 end

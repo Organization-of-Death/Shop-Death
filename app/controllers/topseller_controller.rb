@@ -47,7 +47,7 @@ class TopsellerController < ApplicationController
     newap = ap.sort {|x, y| y <=> x} # sort descending
     @listtopbyQuantity = Array.new
     @listtopQuantity = Array.new
-    puts 'sssssssss'
+    # puts 'sssssssss'
     if(ap.max()>0)
       @topsellername2 = "down below"
       @num2 = ""
@@ -63,8 +63,8 @@ class TopsellerController < ApplicationController
       @topsellername2 = 'no record yet'
       @num2 = 0
     end
-    puts ap.max()
-    puts 'sssssssssssssss'
+    # puts ap.max()
+    # puts 'sssssssssssssss'
     
   end
   def organ

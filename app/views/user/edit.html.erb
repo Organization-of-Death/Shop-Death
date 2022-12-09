@@ -11,6 +11,7 @@
     <%= form.label :query, "User type: (0 = Admin, 1 = Seller, 2 = Buyer)",:class=>'mt-4' %>
     <%= form.number_field "usertype",:value => params['usertype'],in: 0...3,:required=>'required',:class=>'form-control',:placeholder => @username.user_type %><br>
     <%= form.hidden_field :id,value:@username.id%>    
+    <%= form.hidden_field :lock_version,value:@username.lock_version%>    
     <br>
     <%= form.submit "Save" %>
 <% end %>
