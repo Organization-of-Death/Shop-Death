@@ -1,14 +1,29 @@
-<h1>Item#new</h1>
-<p>Find me in app/views/item/new.html.erb</p>
+<h1>New Item</h1>
 <%=@User%>
 <%= form_with url: '/main/user_manage', method: :post, data:{turbo:false} do |form| %>
-    <%= form.label :query, "Name:" %>
-    <%= form.text_field "name",:value => params["name"],:required=>'required' %><br>
-    <%= form.label :query, "Price:" %>
-    <%= form.number_field "price",:value => params["price"],:required=>'required' %><br>
-    <%= form.label :query, "Stock" %>
-    <%= form.number_field "stock",:value =>params["stock"],:required=>'required' %>
+    <%= form.label :name, "Name:" %>
+    <%= form.text_field "name",:value => params["name"],:required=>'required', class: "form-control" %><br>
+    <%= form.label :category, "Category:" %>
+    <%= form.text_field "category",:value =>@category,:required=>'required', class: "form-control" %>
+    <br>
+    <%= form.label :enable, "Enable:" %>
+    <br>
+    <%= form.radio_button "enable", 'yes', class: "form-check-input mx-2", checked: true %>Yes
+    <%= form.radio_button "enable", 'no', class: "form-check-input mx-2" %>No
+    <br>
+    <br>
+    <%= form.label :picture, "Picture (Optional):", style: "display: block", class: 'formFileLg' %>
+    <br>
+    <%= form.file_field :picture, class: 'form-control form-control-sm' %>
     <br>
     <%= form.hidden_field :username,value:@User%>
-    <%= form.submit "Create" %>
+    <br>
+    <div class='row'>
+        <div class='col'>
+            <%= form.submit "Create", class: 'btn btn-primary' %>
+        </div>
+        <div class='col'>
+            <%= link_to "Cancel", item_index_path, class: 'btn btn-secondary' %>
+        </div>
+    </div>
 <% end %>

@@ -1,0 +1,21 @@
+<div class = 'container text-center'  >  
+    <h1 class='mt-4 mb-4'>Profile</h1>
+    <h4 >Name: <%=@user.name%>  </h4>
+    <h4 > Username: <%=@user.username%>  </h4>
+    <h4 >User Type: <%=@user.user_type%> </h4>
+    <h4 >Password: <%=@user.password_digest%> </h4>
+    <% if !@show%>
+        <%= button_to "New Password", profile_password_path,:class => 'btn btn-primary',:method => :post %>
+    <%end%>
+    <% if @show%>
+        <%= form_with url: '/profile/main', method: :post, data:{turbo:false} do |form| %>
+            <%= form.label :query, "Old Password:",:class=>'form-label mt-5' %>
+            <%= form.password_field "oldpassword",:value => params["oldpassword"],:required=>'required',:class=>'form-control' %><br>
+            <%= form.label :query, "New Password:",:class=>'form-label' %>
+            <%= form.password_field "newpassword",:value => params["newpassword"],:required=>'required',:class=>'form-control' %><br>
+            <%= form.submit "Confirm",:class=>'btn btn-primary' %>
+        <% end %> 
+    <%end%>
+   
+</div>
+    

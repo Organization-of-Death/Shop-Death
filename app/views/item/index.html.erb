@@ -1,0 +1,58 @@
+<h1>All Items</h1>
+
+<% if @items.size ==0 %>
+<div class="d-flex justify-content-center align-items-center bg-info text-white ">
+    <p class="my-2">No data available in table</p>
+</div>
+<%else%>
+<table id='items' class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Enable</th>
+            <th>Picture</th>
+            <th></th><!-- for datatable -->
+            <th></th><!-- for datatable -->
+        </tr>
+    </thead>
+    <tbody>
+        <!--
+            <% if @items.size == 0 %>
+                <tr><td>no items</td></tr>
+            <% end %>
+        -->
+        <% @items.each do |item| %>
+            <tr>
+                <td><%= item.id %></td>
+                <td><%= item.name %></td>
+                <td><%= item.category %></td>
+                <td><%= item.enable %></td>
+                <td>
+                    <% if item.picture.attached? %>
+                        <%= image_tag rails_blob_path(item.picture.variant(:thumb), disposition: :attachment) %>
+                    <% else %>
+                        <%= image_tag "nopic.png", :size => "100"%>
+                    <% end %>
+                </td>
+                <% if item.enable %>
+                  <td><%= button_to "Disable", set_enable_path(item_id: item.id, enable: false), method: :post, class: 'btn btn-danger'%></td>
+                <% else %>
+                  <td><%= button_to "Enable", set_enable_path(item_id: item.id, enable: true), method: :post, class: 'btn btn-success'%></td>
+                <% end %>
+                <td><%= link_to "Show", show_item_path(item.id), class: 'btn btn-primary' %></td>
+            </tr>
+        <% end %>
+
+    </tbody>
+</table>
+<% end %>
+<%= link_to "New", new_item_path, class: 'btn btn-primary' %>
+
+
+<script>
+    $(document).ready( function () {
+        $('#items').DataTable();
+    });
+</script>

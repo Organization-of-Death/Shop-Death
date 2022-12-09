@@ -17,13 +17,14 @@ class MainController < ApplicationController
     end
     if params['commit'] == 'Login'
       User.connection
-      puts 'aaaaaaaaaaaaaaaaaaaa'
+      # puts 'aaaaaaaaaaaaaaaaaaaa'
       neware = User.new
       whoare = User.find_by username: params["username"]
       if whoare == nil
         redirect_to main_login_path, notice:'This username is not exist'
       else 
-        if whoare.password != params["password"]
+        if (!whoare.authenticate(params[:password]))
+          # puts 'sssssssssssssssssssss'
           redirect_to main_login_path, notice:'Wrong password or username!'
         else #normal case
           @Name = whoare.username
@@ -40,19 +41,19 @@ class MainController < ApplicationController
       end
     elsif params['commit'] == 'Register'
       User.connection
-      puts 'aaaaaaaaaaaaaaaaaaaa'
+      # puts 'aaaaaaaaaaaaaaaaaaaa'
       neware = User.new
       whoare = User.find_by username: params["username"]
       if whoare == nil # normal case
         neware.name = params["name"]
         neware.username = params["username"]
         neware.password = params["password"]
-        neware.user_type = params['usertype']
+        neware.user_type = params['usertype'].to_i
         neware.save
         @Name = params['username']
         
         session[:username] = params['username']
-        session[:usertype] = params['usertype']
+        session[:usertype] = params['usertype'].to_i
         Item.connection
         User.connection
  
@@ -60,13 +61,16 @@ class MainController < ApplicationController
         redirect_to main_register_path, notice:'This username is already used!!!'
       end
     else 
-      puts'sdssd'
+      # puts'sdssd'
       if(session[:username] == nil)
         return redirect_to main_login_path, notice:'you must login first'
       end
         Item.connection
         User.connection
         whoare = User.find_by username: session["username"]
+        if(whoare == nil)
+          return redirect_to main_login_path, notice:'you must login first'
+        end
         @Name = whoare.username
   
     end
@@ -82,33 +86,52 @@ class MainController < ApplicationController
     elsif params['commit'] == 'Create'
       Item.connection
       User.connection
-      puts 'aaaaaaaaaaaaaaaaaaaa'
+      # puts 'aaaaaaaaaaaaaaaaaaaa'
       newitem = Item.new
       whoare = User.find_by username: params["username"]
       newitem.name = params['name']
-      newitem.price = params['price']
-      newitem.stock = params['stock']
-      newitem.User_id = whoare.id
+      newitem.category = params['category']
+      if params['enable'] == 'yes'
+        newitem.enable = true
+      else
+        newitem.enable = false
+      end
+
+      if params[:picture]
+        newitem.picture.attach(params[:picture])
+      end
+
       newitem.save
-      redirect_to controller:'main',action:'user_item', Username: session['username']
+      redirect_to controller: 'item', action: 'index'
+      # redirect_to controller:'main',action:'user_item', Username: session['username']
     elsif params['commit'] == 'Edit'
-      
+      puts '===================='
+      puts params['item_id']
+      puts '===================='
       redirect_to controller:'item',action:'edit', item_id: params['item_id']
     elsif params['commit'] == 'Done'
       Item.connection
       User.connection
       item = Item.find_by id: params['item_id']
       item.name = params['name']
-      item.price = params['price']
-      item.stock = params['stock']
+      item.category = params['category']
+      if params['enable'] == 'yes'
+        item.enable = true
+      else
+        item.enable = false
+      end
+      # item.price = params['price']
+      # item.stock = params['stock']
       item.save
-      redirect_to controller:'main',action:'user_item', Username: session['username']
+      redirect_to controller: 'item', action: 'index'
+      # redirect_to controller:'main',action:'user_item', Username: session['username']
     elsif params['commit'] == 'Delete'
       Item.connection
       User.connection
       item = Item.find_by id:params['item_id']
       item.destroy
-      redirect_to controller:'main',action:'user_item'
+      redirect_to controller: 'item', action: 'index'
+      # redirect_to controller:'main',action:'user_item'
     else
     end
   end
@@ -141,12 +164,12 @@ class MainController < ApplicationController
   
   end
   def log_out
-    puts 'ggggggggggggg'
-    puts session[:username]
+    # puts 'ggggggggggggg'
+    # puts session[:username]
     reset_session
     redirect_to main_login_path
-    puts 'ggggggggggggg'
-    puts session[:username]
+    # puts 'ggggggggggggg'
+    # puts session[:username]
   end
   
 end

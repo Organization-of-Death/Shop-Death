@@ -1,6 +1,5 @@
 
-<h1>Main#login</h1>
-<p>Find me in app/views/main/login.html.erb</p>
+<h1>Welcome Please Login</h1>
 <%= form_with url: '/main/home', method: :post, data:{turbo:false} do |form| %>
 
     
@@ -15,6 +14,6 @@
     <%= form.submit "Login",:class=>'btn btn-primary' %>
 <% end %>
 <%= form_with url: '/main/register', method: :post, data:{turbo:false} do |form| %>
-    <%= form.submit "Register" %>
+    <%= form.submit "Register", class: 'btn btn-secondary my-1' %>
 <% end %>
 

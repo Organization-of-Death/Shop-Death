@@ -1,0 +1,23 @@
+# rails testing on wsl
+https://gist.github.com/danwhitston/5cea26ae0861ce1520695cff3c2c3315
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps
+https://cloudbytes.dev/snippets/run-selenium-and-chrome-on-wsl2
+# this works
+https://stackoverflow.com/questions/56875116/cant-run-rails-system-test-on-wsl-ubuntu-18
+
+https://medium.com/@mahumtofiq/environment-variables-in-windows-wsl2-and-interoperability-3415d017b942
+# this works
+https://www.bleepingcomputer.com/news/microsoft/how-to-run-windows-10-programs-in-a-wsl-linux-shell/
+
+
+1. ลง GPU driver สำหรับ WSL2 แล้วก็ติดตั้ง google chrome
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps#install-google-chrome-for-linux
+
+2. เพิ่มสองบรรทัดนี้เข้าไปในไฟล์ ~/.bashrc ใน vscode
+export DISPLAY=$(ip route list default | awk '{print $3}'):0
+export LIBGL_ALWAYS_INDIRECT=1
+
+3. โหลด xlaunch จาก https://sourceforge.net/projects/vcxsrv/
+เปิด xlaunch start no client ใน extra settings ติ๊ก Disable access control
+
+4. rails test:system 

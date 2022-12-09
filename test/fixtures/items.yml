@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  username: MyString
-  price: 1
-  stock: 1
-  User: one
+# one:
+#   name: MyString
+#   username: MyString
+#   price: 1
+#   stock: 1
+#   User: one
 
-two:
-  name: MyString
-  username: MyString
-  price: 1
-  stock: 1
-  User: two
+# two:
+#   name: MyString
+#   username: MyString
+#   price: 1
+#   stock: 1
+#   User: two

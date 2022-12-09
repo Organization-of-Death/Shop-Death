@@ -1,0 +1,31 @@
+<h1>Market#new</h1>
+<p>Find me in app/views/market/new.html.erb</p>
+<h3>Item_ID</h3>
+<p><%= @item_for_new_market.id %></p>
+
+<h3>Name</h3>
+<p><%= @item_for_new_market.name %></p>
+
+<h3>Category</h3>
+<p><%= @item_for_new_market.category %></p>
+
+<h3>Image</h3>
+<% if @item_for_new_market.picture.attached? %>
+      <%= image_tag rails_blob_path(@item_for_new_market.picture.variant(resize_to_limit: [100, 100]), disposition: :attachment) %>
+<% else %>
+    <%= image_tag "nopic.png", :size => "100"%>
+<% end %>
+
+
+<%= form_with url: create_my_inventory_path, method: 'post',data: {turbo:false} do |form| %>
+        <%= form.label :price, style: "display: block" %>
+        <%= form.text_field :price, class: 'form-control' %>
+        <%= form.label :stock, style: "display: block" %>
+        <%= form.number_field :stock, in: 0...10000, class: 'form-control' %>
+
+    <%= form.hidden_field :item_id, value: @item_for_new_market.id  %>
+        <%= form.submit "CONFIRM", class: 'btn btn-primary my-1' %>
+<% end %>
+
+<%= link_to "CANCEL", my_inventory_path, class: 'btn btn-secondary' %>
+ 

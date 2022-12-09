@@ -1,6 +1,3 @@
 <h1> HOME </h1>
-<%=@Name%>
-<%= form_with url: '/main/log_out', method: 'post', data: {turbo:false} do |form| %>
-    <%= form.hidden_field :username,value:@Username%>
-    <%= form.submit "Logout"%>
-<%end%>
+<p>Signed in as <span class="text-info"><%=@Name%></span><p>
+
