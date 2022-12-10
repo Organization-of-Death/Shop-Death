@@ -1,7 +1,6 @@
 require "application_system_test_case"
-class PurchaseHistoryTest < ApplicationSystemTestCase
+class MarketTest < ApplicationSystemTestCase
   setup do
-    @test_buyer_id = users(:buyer1).id
     @test_seller_id = users(:seller1).id
 
     @test_item = Item.create(                       # add 1 item
@@ -34,8 +33,16 @@ class PurchaseHistoryTest < ApplicationSystemTestCase
     end
     test "testMarketEdit" do
         login_as_seller
-    
+
+        @test_market = Market.create(                       # add 1 market model instance first
+          price: 50,
+          stock: 40,
+          item_id: @test_item.id,
+          seller_id: @test_seller_id
+        )
+
         click_on "My Inventory"
+        assert_selector "td", {count:1,text: "40"}  #before editing the stock
         click_on "EDIT"
 
         fill_in "Stock", with: "60" 
@@ -44,12 +51,22 @@ class PurchaseHistoryTest < ApplicationSystemTestCase
     
         assert_selector ".table" do
             assert_selector "td",{count: 2, text: @test_item.id} # one more from item table
-            assert_selector "td",{count:1,text: "60"}
+            assert_selector "td",{count:1,text: "60"} # after editing the stock
     
             end
         end
+
+
         test "testMarketDelete" do 
-          login_as_seller #There is one item on sell in the first place, don't know why
+          login_as_seller 
+
+          @test_market = Market.create(                       # add 1 market model instance first
+            price: 50,
+            stock: 40,
+            item_id: @test_item.id,
+            seller_id: @test_seller_id
+          )
+
           click_on "My Inventory"
           click_on "Delete"
        
