@@ -11,32 +11,24 @@ class PurchaseHistoryTest < ApplicationSystemTestCase
     )
     
   end
-  test "testMarketDelete" do 
-    login_as_seller #There is one item on sell in the first place, don't know why
-    click_on "My Inventory"
-    click_on "Delete"
- 
-    assert_selector ".my-2" , text: "No data available in table"
-    
-  end
-
   test "testMarketAdd" do
     login_as_seller
 
     click_on "My Inventory"
     #no on sell item for this user
     #add item to market
-    click_on "Delete"
-    assert_selector ".my-2" , text: "No data available in table"
+    # click_on "Delete"
+    # assert_selector ".my-2" , text: "No data available in table"
     click_on "SELL THIS",:match => :first
     fill_in "Price", with: "1"
-    fill_in "Stock", with: "50" 
+    fill_in "Stock", with: "49" 
     click_on "CONFIRM"
    
     #check the item added
+   
     assert_selector ".table" do
-        assert_selector "td",{count: 1, text: @test_item.id}
-        assert_selector "td",{count:1,text: "50"}
+        assert_selector "td",{count: 2, text: @test_item.id}
+        assert_selector "td",{count:1,text: "49"}
 
         end
     end
@@ -49,17 +41,22 @@ class PurchaseHistoryTest < ApplicationSystemTestCase
         fill_in "Stock", with: "60" 
         click_on "CONFIRM"
 
-        sleep(5)
+    
         assert_selector ".table" do
             assert_selector "td",{count: 2, text: @test_item.id} # one more from item table
             assert_selector "td",{count:1,text: "60"}
     
             end
         end
+        test "testMarketDelete" do 
+          login_as_seller #There is one item on sell in the first place, don't know why
+          click_on "My Inventory"
+          click_on "Delete"
+       
+          assert_selector ".my-2" , text: "No data available in table"
+          
+        end
 
-
-        #no on sell item for this user
-        #add item to market
        
 
 
