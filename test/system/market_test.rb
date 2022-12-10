@@ -20,7 +20,7 @@ class PurchaseHistoryTest < ApplicationSystemTestCase
     # click_on "Delete"
     # assert_selector ".my-2" , text: "No data available in table"
     click_on "SELL THIS",:match => :first
-    fill_in "Price", with: "1"
+    fill_in "Price", with: "9"
     fill_in "Stock", with: "49" 
     click_on "CONFIRM"
    
