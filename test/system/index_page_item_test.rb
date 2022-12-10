@@ -119,7 +119,7 @@ class IndexPageItemTest < ApplicationSystemTestCase
 
         login_as_seller
         visit '/my_inventory'
-        assert_selector "td", {count: 0, text: "test_item_name"}    # assert visibility in my_market
+        assert_selector "td", {count: 0, text: "test_item_name"}    # assert invisibility in my_market
         assert_selector "td", {count: 0, text: "test_item_category"}
         logout
         
@@ -153,7 +153,7 @@ class IndexPageItemTest < ApplicationSystemTestCase
         # the seller shouldn't see it in both the All items & My Inventories table in /my_inventory page
         login_as_seller
         visit '/my_inventory'
-        assert_selector "td", {count: 0, text: "test_item_name"}    # assert visibility in my_market
+        assert_selector "td", {count: 0, text: "test_item_name"}    # assert invisibility in my_market
         assert_selector "td", {count: 0, text: "test_item_category"}
     end
 end

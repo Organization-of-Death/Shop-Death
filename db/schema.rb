@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_141852) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_09_161944) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_141852) do
     t.datetime "updated_at", null: false
     t.string "category"
     t.boolean "enable"
+    t.integer "lock_version"
   end
 
   create_table "markets", force: :cascade do |t|
@@ -78,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_141852) do
     t.datetime "updated_at", null: false
     t.integer "user_type"
     t.string "password_digest"
-    t.integer "lock_version", default: 0, null: false
+    t.integer "lock_version"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

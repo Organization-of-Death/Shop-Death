@@ -37,9 +37,9 @@
                     <% end %>
                 </td>
                 <% if item.enable %>
-                  <td><%= button_to "Disable", set_enable_path(item_id: item.id, enable: false), method: :post, class: 'btn btn-danger'%></td>
+                  <td><%= button_to "Disable", set_enable_path(item_id: item.id, enable: false, lock_version: item.lock_version), method: :post, class: 'btn btn-danger'%></td>
                 <% else %>
-                  <td><%= button_to "Enable", set_enable_path(item_id: item.id, enable: true), method: :post, class: 'btn btn-success'%></td>
+                  <td><%= button_to "Enable", set_enable_path(item_id: item.id, enable: true, lock_version: item.lock_version), method: :post, class: 'btn btn-success'%></td>
                 <% end %>
                 <td><%= link_to "Show", show_item_path(item.id), class: 'btn btn-primary' %></td>
             </tr>

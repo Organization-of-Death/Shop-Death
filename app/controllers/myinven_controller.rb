@@ -33,7 +33,7 @@ class MyinvenController < ApplicationController
         
         market = Market.find_by id: params["market_id#{i}"]
         # puts 'dddddddddddddddddddddd'
-        puts market.stock
+        # puts market.stock
         if( market.stock - params["amount#{i}"].to_i < 0)
           redirect_to my_market_main_path, notice:'Buy Unsuccesfully, please refresh page' and return
         

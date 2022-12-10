@@ -11,34 +11,46 @@ class UserController < ApplicationController
       redirect_to controller: 'user',action: 'edit',id:params[:id]
     elsif params['commit'] == 'Delete'
      user = User.find_by id:params[:id]
+     if user.nil?
+        redirect_to user_main_path, notice: 'while you were blinking, some admin already deleted the user' and return
+     end
      if(user.username == session[:username])
       redirect_to user_main_path, notice: 'u cannot destroy yourself' and return
      end
+
       user.destroy
-     redirect_to user_main_path
+      redirect_to user_main_path, notice: 'destroyed user successfully' and return
     elsif params['commit'] == 'Save'
       User.connection
-      whoare = User.find_by username: params["username"]
-      if whoare == nil
-        same = User.find_by username: session[:username]
-        haha = same.id
-        user = User.lock.find(haha)
-        user = User.find_by id: params[:id]
-        user.name = params["name"]
-        user.username = params["username"]
-        user.password = params["password"]
-        user.user_type = params['usertype'].to_i
-        user.save
-        if haha == params[:id].to_i
-          puts 'dddddddddddddddddddddddddddd'
-          session[:username] = params["username"]
-          session[:usertype] = params["usertype"].to_i
-        else
-          puts 'aaaaaaaaaaaaaaaaaaaaaaaaaaa'
+      # check first if the lock_version is okay, otherwise notify the admin of the updated value
+      user = User.find_by id: params[:id]
+      if user.lock_version == params[:lock_version].to_i
+        whoare = User.find_by username: params["username"]
+        if whoare == nil
+          # user.name = params["name"]
+          # user.username = params["username"]
+          # user.password = params["password"]
+          # user.user_type = params['usertype'].to_i
+          # user.save
+          
+          user.update(name: params["name"], username: params["username"], password: params["password"], user_type: params["usertype"].to_i, lock_version: params[:lock_version])
+
+          same = User.find_by username: session[:username]
+          haha = same.id
+          if haha == params[:id].to_i # if the user being edited is the one being logged in, update the session
+            puts 'dddddddddddddddddddddddddddd'
+            session[:username] = params["username"]
+            session[:usertype] = params["usertype"].to_i
+          else
+            puts 'aaaaaaaaaaaaaaaaaaaaaaaaaaa'
+          end
+          redirect_to user_main_path, notice:'Updated User Success'
+        else 
+          redirect_to user_main_path, notice:'This username is already used!!!'
         end
-        redirect_to user_main_path
-      else 
-        redirect_to user_main_path, notice:'This username is already used!!!'
+      else
+        flash[:notice] = "other admins are also editing, please check the updated value first"
+        redirect_to controller: 'user', action: 'edit', id: params['id']
       end
   
     elsif params['commit'] == 'New'
