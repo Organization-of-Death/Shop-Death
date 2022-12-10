@@ -22,6 +22,7 @@ class UserController < ApplicationController
       if whoare == nil
         same = User.find_by username: session[:username]
         haha = same.id
+        user = User.lock.find(haha)
         user = User.find_by id: params[:id]
         user.name = params["name"]
         user.username = params["username"]
