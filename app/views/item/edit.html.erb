@@ -1,5 +1,15 @@
-<h1>Item#edit</h1>
-<p>Find me in app/views/item/edit.html.erb</p>
+<h1>Item Edit</h1>
+<% if @item.errors.any? %>
+    <div style="color: red">
+        <h2><%= pluralize( @item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+        <ul>
+        <% @item.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+        <% end %>
+        </ul>
+    </div>
+<% end %>
 
 <%= form_with url: '/main/user_manage', method: :post, data:{turbo:false} do |form| %>
     <%= form.label :query, "Name:" %>
@@ -13,7 +23,8 @@
     <br>
     <%= form.label :picture, style: "display: block" %>
     <%= form.file_field :picture %>
-    <%= form.hidden_field :item_id,value:@Item%>
+    <%= form.hidden_field :item_id, value:@Item%>
+    <%= form.hidden_field :lock_version, value: @lock_version %>
     <%= form.submit "Done" %>
 <% end %>
 
