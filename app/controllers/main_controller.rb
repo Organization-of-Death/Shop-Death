@@ -3,7 +3,7 @@ class MainController < ApplicationController
   end
   def welcome # two root direction
     if(session[:username] != nil)
-      puts 'd'
+      # puts 'd'
       redirect_to main_home_path,hi:'yo' and return
     else
       redirect_to main_login_path,hi:'yo' and return
@@ -12,7 +12,7 @@ class MainController < ApplicationController
   end
   def home
     if params['hi'] == 'yo'
-      puts 'x'
+      # puts 'x'
       return
     end
     if params['commit'] == 'Login'
@@ -105,31 +105,34 @@ class MainController < ApplicationController
       redirect_to controller: 'item', action: 'index'
       # redirect_to controller:'main',action:'user_item', Username: session['username']
     elsif params['commit'] == 'Edit'
-      puts '===================='
-      puts params['item_id']
-      puts '===================='
+      # puts '===================='
+      # puts params['item_id']
+      # puts '===================='
       redirect_to controller:'item',action:'edit', item_id: params['item_id']
-    elsif params['commit'] == 'Done'
+    elsif params['commit'] == 'Done'  # this is for submiting the item update
       Item.connection
       User.connection
       item = Item.find_by id: params['item_id']
-      item.name = params['name']
-      item.category = params['category']
-      if params['enable'] == 'yes'
-        item.enable = true
+
+      # check first if the lock_version is okay, otherwise notify the admin of the updated value
+      if item.lock_version == params[:lock_version].to_i
+        item.update(name: params['name'], category: params['category'], enable: params['enable']=='yes', lock_version: params[:lock_version].to_i)
+        redirect_to controller: 'item', action: 'index'
       else
-        item.enable = false
+        flash[:notice] = "other admins are also editing, please check the updated value first"
+        redirect_to controller: 'item', action: 'edit', item_id: params['item_id']
       end
-      # item.price = params['price']
-      # item.stock = params['stock']
-      item.save
-      redirect_to controller: 'item', action: 'index'
       # redirect_to controller:'main',action:'user_item', Username: session['username']
     elsif params['commit'] == 'Delete'
       Item.connection
       User.connection
       item = Item.find_by id:params['item_id']
+      if item.nil?
+        flash[:notice] = "while you were blinking, some admin already deleted the item"
+        redirect_to controller: 'item', action: 'index' and return
+      end
       item.destroy
+      flash[:notice] = "delete item success"
       redirect_to controller: 'item', action: 'index'
       # redirect_to controller:'main',action:'user_item'
     else
